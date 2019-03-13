@@ -18,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.*;
 import com.uniovi.repositories.ProductsRepository;
-import com.uniovi.services.ProductService;
+
 
 @Service
-public class ProductService {
+public class ProductsService {
 
 	@Autowired
 	private HttpSession httpSession;
