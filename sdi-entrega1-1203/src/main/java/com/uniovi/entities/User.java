@@ -14,6 +14,25 @@ public class User {
 	private String dni;
 	private String name;
 	private String lastName;
+	private String Gmail;
+	private Double Wallet;
+	
+	public Double getWallet() {
+		return Wallet;
+	}
+
+	public void setWallet(Double wallet) {
+		Wallet = wallet;
+	}
+
+	public String getGmail() {
+		return Gmail;
+	}
+
+	public void setGmail(String gmail) {
+		Gmail = gmail;
+	}
+
 	private String password;
 	@Transient // propiedad que no se almacena e la tabla.
 	private String passwordConfirm;
