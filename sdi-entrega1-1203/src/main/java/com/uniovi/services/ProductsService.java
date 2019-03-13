@@ -36,12 +36,12 @@ public class ProductsService {
 		return Products;
 	}
 	
-	public void setProductResend(boolean revised,Long id){
+	public void setProductSold(boolean revised,Long id){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String dni = auth.getName();
 		Product Product = ProductsRepository.findById(id).get();
 		if(Product.getUser().getDni().equals(dni) ) {
-		ProductsRepository.updateResend(revised, id);
+		ProductsRepository.updateSold(revised, id);
 		}
 	}
 
@@ -55,8 +55,7 @@ public class ProductsService {
 		}
 		Product ProductObtained = ProductsRepository.findById(id).get();
 		consultedList.add(ProductObtained);
-		httpSession.setAttribute("consultedList"
-		, consultedList);
+		httpSession.setAttribute("consultedList", consultedList);
 		return ProductObtained;
 	}
 

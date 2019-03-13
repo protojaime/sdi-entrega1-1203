@@ -1,5 +1,7 @@
 package com.uniovi.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,8 +13,26 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private Long id;
+	private String name;
 	private String description;
 	private Double price;
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getDueToDate() {
+		return DueToDate;
+	}
+
+	public void setDueToDate(Date dueToDate) {
+		DueToDate = dueToDate;
+	}
+
+	private Date DueToDate;
 	private Boolean sold;
 	
 	public Boolean getSold() {

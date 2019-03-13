@@ -80,14 +80,14 @@ public class ProductsController {
 		return "Product/add";
 	}
 
-	@RequestMapping(value="/product/{id}/resend", method=RequestMethod.GET)
-	public String setResendTrue(Model model, @PathVariable Long id){
-	ProductsService.setProductResend(true, id);
+	@RequestMapping(value="/product/{id}/sold", method=RequestMethod.GET)
+	public String setSoldTrue(Model model, @PathVariable Long id){
+	ProductsService.setProductSold(true, id);
 	return "redirect:/product/list";
 	}
-	@RequestMapping(value="/product/{id}/noresend", method=RequestMethod.GET)
-	public String setResendFalse(Model model, @PathVariable Long id){
-	ProductsService.setProductResend(false, id);
+	@RequestMapping(value="/product/{id}/nosold", method=RequestMethod.GET)
+	public String setSoldFalse(Model model, @PathVariable Long id){
+	ProductsService.setProductSold(false, id);
 	return "redirect:/product/list";
 	}
 
