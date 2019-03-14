@@ -6,24 +6,24 @@
 <nav th:replace="fragments/nav"/>
 <div class="container">
  
-<h2>Notas</h2>
+<h2>Productos</h2>
  
 
  
- <form class="navbar-form" action="/mark/list">
+ <form class="navbar-form" action="/product/list">
  
 <div class="form-group">
  
 <input name="searchText" type="text" class="form-control" size="50"
  
-placeholder="Buscar por descripción o nombre del alumno">
+placeholder="Buscar por descripción o nombre del producto">
  
 </div>
  
 <button type="submit" class="btn btn-default">Buscar</button>
 </form>
 
-<p>Las notas que actualmente figuran en el sistema son las siguientes:</p>
+<p>Las productos que actualmente figuran en el sistema son las siguientes:</p>
 
 <button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
  
@@ -33,7 +33,7 @@ placeholder="Buscar por descripción o nombre del alumno">
  
 var numberPage = [[${param.page}]];
  
-var urlUpdate = '/mark/list/update';
+var urlUpdate = '/product/list/update';
  
 if (numberPage != null ){
  
@@ -51,7 +51,7 @@ $("#tableMarks").load(urlUpdate);
  
 $( "#updateButton" ).click(function() {
  
-$("#tableMarks").load('/mark/list/update');
+$("#tableMarks").load('/product/list/update');
  
 });
  
@@ -73,7 +73,7 @@ $("#tableMarks").load('/mark/list/update');
  
 <th>Descripción</th>
  
-<th>Puntuación</th>
+<th>Precio</th>
  
 <th class="col-md-1"> </th>
  
@@ -87,38 +87,38 @@ $("#tableMarks").load('/mark/list/update');
  
 <tbody>
  
-<tr th:each="mark : ${markList}">
+<tr th:each="product : ${productList}">
  
-<td th:text="${mark.id}"> 1</td>
+<td th:text="${product.id}"> 1</td>
  
-<td th:text="${mark.description}"> Ejercicio 1</td>
+<td th:text="${product.description}"> Ejercicio 1</td>
  
-<td th:text="${mark.score}">10</td>
+<td th:text="${product.price}">10</td>
  
-<td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
+<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
  
-<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+<td><a sec:authorize="hasRole('ROLE_ADMIN')"
  
-th:href="${'/mark/edit/' + mark.id}">modificar</a>
+th:href="${'/product/edit/' + product.id}">modificar</a>
  
  
 <div sec:authorize="hasRole('ROLE_STUDENT')" >
  
-<div th:if="${mark.resend}">
+<div th:if="${product.sold}">
  
-<button type="button" th:id="${'resendButton' + mark.id}"
+<button type="button" th:id="${'resendButton' + product.id}"
  
 class="btn btn-info">Reenviar</button>
  
 <script th:inline="javascript">
  
 /*<![CDATA[*/
-$( "#resendButton[[${mark.id}]]" ).click(function() {
+$( "#resendButton[[${product.id}]]" ).click(function() {
  
-$.get( "/mark/[[${mark.id}]]/noresend", function( data ) {
+$.get( "/product/[[${product.id}]]/noresend", function( data ) {
 	var numberPage = [[${param.page}]];
 	 
-	var urlUpdate = '/mark/list/update';
+	var urlUpdate = '/product/list/update';
 	 
 	 
 	if ( numberPage != null ){
@@ -138,20 +138,20 @@ $.get( "/mark/[[${mark.id}]]/noresend", function( data ) {
  
 </div>
  
-<div th:unless="${mark.resend}">
-<button type="button" th:id="${'noresendButton' + mark.id}"
+<div th:unless="${product.sold}">
+<button type="button" th:id="${'noresendButton' + product.id}"
  
 class="btn btn-default">No reenviar</button>
  
 <script th:inline="javascript">
  
 /*<![CDATA[*/
-$( "#noresendButton[[${mark.id}]]" ).click(function() {
+$( "#noresendButton[[${product.id}]]" ).click(function() {
  
-$.get( "/mark/[[${mark.id}]]/resend", function( data ) {
+$.get( "/product/[[${product.id}]]/resend", function( data ) {
 	var numberPage = [[${param.page}]];
 	 
-	var urlUpdate = '/mark/list/update';
+	var urlUpdate = '/product/list/update';
 	 
 	if ( numberPage != null ){
 	 
@@ -175,7 +175,7 @@ $.get( "/mark/[[${mark.id}]]/resend", function( data ) {
  
 <td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
  
-th:href="${'/mark/delete/' + mark.id}">eliminar</a>
+th:href="${'/product/delete/' + product.id}">eliminar</a>
  
 </td>
  

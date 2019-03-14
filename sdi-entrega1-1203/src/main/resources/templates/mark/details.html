@@ -11,7 +11,7 @@
 		<h2>Editar Nota</h2>
 
 		<form class="form-horizontal" method="post"
-			th:action="${'/mark/edit/' + mark.id}">
+			th:action="${'/product/edit/' + product.id}">
 
 
 			<div class="form-group">
@@ -20,7 +20,7 @@
 
 				<div class="col-sm-10">
 
-					<input th:value="${mark.description}" type="text"
+					<input th:value="${product.description}" type="text"
 						class="form-control" name="description"
 						placeholder="Ejemplo Ejercicio 1" required="true" />
 
@@ -35,7 +35,7 @@
 				<div class="col-sm-10">
 
 
-					<input th:value="${mark.score}" type="number" class="form-control"
+					<input th:value="${product.score}" type="number" class="form-control"
 						name="score" placeholder="Entre 0 y 10" required="true" />
 
 				</div>
@@ -67,7 +67,7 @@
 
 			<div class="panel-heading">DNI</div>
 
-			<div class="panel-body" th:text="${mark.user.dni}">28276</div>
+			<div class="panel-body" th:text="${product.user.dni}">28276</div>
 
 		</div>
 
@@ -77,7 +77,7 @@
 
 			<div class="panel-heading">Puntuación</div>
 
-			<div class="panel-body" th:text="${mark.score}">100</div>
+			<div class="panel-body" th:text="${product.score}">100</div>
 
 		</div>
 	</div>
