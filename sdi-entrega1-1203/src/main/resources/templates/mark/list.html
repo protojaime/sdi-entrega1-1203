@@ -41,7 +41,7 @@ urlUpdate += "?page="+numberPage[0];
  
 }
  
-$("#tableMarks").load(urlUpdate);
+$("#tableProducts").load(urlUpdate);
  
 });
  
@@ -51,7 +51,7 @@ $("#tableMarks").load(urlUpdate);
  
 $( "#updateButton" ).click(function() {
  
-$("#tableMarks").load('/product/list/update');
+$("#tableProducts").load('/product/list/update');
  
 });
  
@@ -63,7 +63,7 @@ $("#tableMarks").load('/product/list/update');
 <div class="table-responsive">
  
  
-<table class="table table-hover" th:fragment="tableMarks" id="tableMarks">
+<table class="table table-hover" th:fragment="tableProducts" id="tableProducts">
  
 <thead>
  
@@ -102,7 +102,7 @@ $("#tableMarks").load('/product/list/update');
 th:href="${'/product/edit/' + product.id}">modificar</a>
  
  
-<div sec:authorize="hasRole('ROLE_STUDENT')" >
+<div sec:authorize="hasRole('ROLE_USER')" >
  
 <div th:if="${product.sold}">
  
@@ -126,7 +126,7 @@ $.get( "/product/[[${product.id}]]/noresend", function( data ) {
 	urlUpdate += "?page="+numberPage[0];
 	 
 	}
-	$("#tableMarks").load(urlUpdate);
+	$("#tableProducts").load(urlUpdate);
 
 });
  
@@ -158,7 +158,7 @@ $.get( "/product/[[${product.id}]]/resend", function( data ) {
 	urlUpdate += "?page="+numberPage[0];
 	 
 	}
-	$("#tableMarks").load(urlUpdate);
+	$("#tableProducts").load(urlUpdate);
 
 });
 });
@@ -173,7 +173,7 @@ $.get( "/product/[[${product.id}]]/resend", function( data ) {
  
 </td>
  
-<td><a sec:authorize="hasRole('ROLE_PROFESSOR')"
+<td><a sec:authorize="hasRole('ROLE_ADMIN')"
  
 th:href="${'/product/delete/' + product.id}">eliminar</a>
  

@@ -66,10 +66,10 @@ public class MarksService {
 	
 	public Page<Mark> getMarksForUser(Pageable pageable, User user){
 		Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());
-		if ( user.getRole().equals("ROLE_STUDENT")) {
+		if ( user.getRole().equals("ROLE_USER")) {
 		marks = marksRepository.findAllByUser(pageable, user);
 		} 
-		if ( user.getRole().equals("ROLE_PROFESSOR")){
+		if ( user.getRole().equals("ROLE_ADMIN")){
 		marks = getMarks(pageable);
 		}
 		return marks;
@@ -78,11 +78,11 @@ public class MarksService {
 		String searchText, User user){
 		Page<Mark> marks = new PageImpl<Mark>(new LinkedList<Mark>());
 		searchText = "%"+searchText+"%";
-		if ( user.getRole().equals("ROLE_STUDENT")) {
+		if ( user.getRole().equals("ROLE_USER")) {
 		marks = marksRepository.
 		searchByDescriptionNameAndUser(pageable, searchText, user);
 		} 
-		if ( user.getRole().equals("ROLE_PROFESSOR")){
+		if ( user.getRole().equals("ROLE_ADMIN")){
 		marks = marksRepository.
 		searchByDescriptionAndName(pageable, searchText);
 		}
