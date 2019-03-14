@@ -14,7 +14,7 @@ public class User {
 	private String dni;
 	private String name;
 	private String lastName;
-	private String Gmail;
+	private String Email;
 	private Double Wallet;
 	
 	public Double getWallet() {
@@ -25,12 +25,12 @@ public class User {
 		Wallet = wallet;
 	}
 
-	public String getGmail() {
-		return Gmail;
+	public String getEmail() {
+		return Email;
 	}
 
-	public void setGmail(String gmail) {
-		Gmail = gmail;
+	public void setEmail(String email) {
+		Email = email;
 	}
 
 	private String password;
@@ -38,6 +38,8 @@ public class User {
 	private String passwordConfirm;
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Mark> marks;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Product> Products;
 
 	public String getPassword() {
 
@@ -71,13 +73,34 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 
 	}
-
 	public User(String dni, String name, String lastName) {
 		super();
 		this.dni = dni;
 		this.name = name;
 		this.lastName = lastName;
+		this.Wallet=100.0;
 	}
+	public User(String dni, String name, String lastName,String email) {
+		super();
+		this.dni = dni;
+		this.name = name;
+		this.lastName = lastName;
+		this.Email=email;
+		this.Wallet=100.0;
+		
+	}
+	public User(String dni, String name, String lastName,String email, Double Wallet) {
+		super();
+		this.dni = dni;
+		this.name = name;
+		this.lastName = lastName;
+		this.Email=email;
+		this.Wallet=Wallet;
+	}
+		
+		
+	
+	
 
 	public User() {
 	}
@@ -124,5 +147,12 @@ public class User {
 
 	public String getFullName() {
 		return this.name + " " + this.lastName;
+	}
+
+	public void setProducts(Set<Product> Products) {
+		this.Products = Products;
+	}
+	public Set<Mark> getProducts() {
+		return marks;
 	}
 }

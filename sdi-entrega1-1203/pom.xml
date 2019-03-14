@@ -10,9 +10,9 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.uniovi</groupId>
-	<artifactId>sdi1203-lab-spring</artifactId>
+	<artifactId>sdi-entrega1-1203</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sdi1203-lab-spring</name>
+	<name>sdi-entrega1-1203</name>
 	<description>Aplicacion para gestion de notas</description>
 
 	<properties>

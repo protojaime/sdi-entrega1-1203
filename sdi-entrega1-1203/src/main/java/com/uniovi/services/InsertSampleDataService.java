@@ -5,7 +5,8 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.uniovi.entities.Mark;
+import com.uniovi.entities.Product;
+import com.uniovi.entities.Product;
 import com.uniovi.entities.User;
 
 @Service
@@ -15,60 +16,58 @@ public class InsertSampleDataService {
 	private UsersService usersService;
 	@SuppressWarnings("unused")
 	@Autowired
-	private MarksService marksService;
+	private ProductsService ProductsService;
 	@Autowired
 	private RolesService rolesService;
 	@PostConstruct
 	public void init() {
-	User user1 = new User("99999990A", "Pedro", "Díaz");
+	User user1 = new User("99999990A", "Pedro", "Díaz","testEmail1@Gmail.com",333.0);
 	user1.setPassword("123456");
 	user1.setRole(rolesService.getRoles()[0]);
-	User user2 = new User("99999991B", "Lucas", "Núñez");
+	User user2 = new User("99999991B", "Lucas", "Núñez","testEmail2@Gmail.com");
 	user2.setPassword("123456");
 	user2.setRole(rolesService.getRoles()[0]);
-	User user3 = new User("99999992C", "María", "Rodríguez");
+	User user3 = new User("99999992C", "María", "Rodríguez","testEmail3@Gmail.com");
 	user3.setPassword("123456");
 	user3.setRole(rolesService.getRoles()[0]);
-	User user4 = new User("99999993D", "Marta", "Almonte");
+	User user4 = new User("99999993D", "Marta", "Almonte","testEmail4@Gmail.com");
 	user4.setPassword("123456");
-	user4.setRole(rolesService.getRoles()[1]);
-	User user5 = new User("99999977E", "Pelayo", "Valdes");
+	user4.setRole(rolesService.getRoles()[0]);
+	User user5 = new User("99999977E", "Pelayo", "Valdes","testEmail6@Gmail.com");
 	user5.setPassword("123456");
-	user5.setRole(rolesService.getRoles()[1]);
-	User user6 = new User("99999988F", "Edward", "Núñez");
-	 
-	 
+	user5.setRole(rolesService.getRoles()[0]);
+	User user6 = new User("99999988F", "Edward", "Núñez","Admin@Gmail.com");
 	user6.setPassword("123456");
-	user6.setRole(rolesService.getRoles()[2]);
-		Set<Mark> user1Marks = new HashSet<Mark>() {
+	user6.setRole(rolesService.getRoles()[1]);
+		Set<Product> user1Products = new HashSet<Product>() {
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = -5817860730374796753L;
 
 			{
-				add(new Mark("Nota A1", 10.0, user1));
-				add(new Mark("Nota A2", 9.0, user1));
-				add(new Mark("Nota A3", 7.0, user1));
-				add(new Mark("Nota A4", 6.5, user1));
+				add(new Product("Producto 1","Descripción producto 1",  10.0, user1));
+				add(new Product("Producto 2","Descripción producto 2",  30.0, user1));
+				add(new Product("Producto 3","Descripción producto 3",  20.0, user1));
+				add(new Product("Producto 4","Descripción producto 4",  50.0, user1));
 			}
 		};
-		user1.setMarks(user1Marks);
-		Set<Mark> user2Marks = new HashSet<Mark>() {
+		user1.setProducts(user1Products);
+		Set<Product> user2Products = new HashSet<Product>() {
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 3837442574885109485L;
 
 			{
-				add(new Mark("Nota B1", 5.0, user2));
-				add(new Mark("Nota B2", 4.3, user2));
-				add(new Mark("Nota B3", 8.0, user2));
-				add(new Mark("Nota B4", 3.5, user2));
+				add(new Product("Producto 5","Descripción producto 5",  12.0, user2));
+				add(new Product("Producto 6","Descripción producto 6",  320.0, user2));
+				add(new Product("Producto 7","Descripción producto 7",  22.0, user2));
+				add(new Product("Producto 8","Descripción producto 8",  5.0, user2));
 			}
 		};
-		user2.setMarks(user2Marks);
-		Set<Mark> user3Marks = new HashSet<Mark>() {
+		user2.setProducts(user2Products);
+		Set<Product> user3Products = new HashSet<Product>() {
 			/**
 			 * 
 			 */
@@ -76,25 +75,27 @@ public class InsertSampleDataService {
 
 			{
 				;
-				add(new Mark("Nota C1", 5.5, user3));
-				add(new Mark("Nota C2", 6.6, user3));
-				add(new Mark("Nota C3", 7.0, user3));
+				add(new Product("Producto 9","Descripción producto 9",  2.0, user3));
+				add(new Product("Producto 10","Descripción producto 10",  30.0, user3));
+				add(new Product("Producto 11","Descripción producto 11",  32.0, user3));
+				add(new Product("Producto 12","Descripción producto 12",  556.0, user3));
 			}
 		};
-		user3.setMarks(user3Marks);
-		Set<Mark> user4Marks = new HashSet<Mark>() {
+		user3.setProducts(user3Products);
+		Set<Product> user4Products = new HashSet<Product>() {
 			/**
 			 * 
 			 */
 			private static final long serialVersionUID = 6620321125893406991L;
 
 			{
-				add(new Mark("Nota D1", 10.0, user4));
-				add(new Mark("Nota D2", 8.0, user4));
-				add(new Mark("Nota D3", 9.0, user4));
+				add(new Product("Producto 13","Descripción producto 13",  24.0, user4));
+				add(new Product("Producto 14","Descripción producto 14",  1.0, user4));
+				add(new Product("Producto 15","Descripción producto 15",  2.20, user4));
+				add(new Product("Producto 16","Descripción producto 16",  55.30, user4));
 			}
 		};
-		user4.setMarks(user4Marks);
+		user4.setProducts(user4Products);
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);

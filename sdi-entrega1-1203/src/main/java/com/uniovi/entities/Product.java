@@ -68,6 +68,14 @@ public class Product {
 		
 	}
 
+	public Product(String name,String description, Double score, User user) {
+		super();
+		this.name=name;
+		this.description = description;
+		this.price = score;
+		this.user = user;
+	}
+
 	public Long getId() {
 		return id;
 	}
