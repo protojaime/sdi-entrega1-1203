@@ -37,8 +37,6 @@ public class User {
 	@Transient // propiedad que no se almacena e la tabla.
 	private String passwordConfirm;
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Mark> marks;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Product> Products;
 
 	public String getPassword() {
@@ -137,13 +135,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public void setMarks(Set<Mark> marks) {
-		this.marks = marks;
-	}
 
-	public Set<Mark> getMarks() {
-		return marks;
-	}
 
 	public String getFullName() {
 		return this.name + " " + this.lastName;
@@ -152,7 +144,7 @@ public class User {
 	public void setProducts(Set<Product> Products) {
 		this.Products = Products;
 	}
-	public Set<Mark> getProducts() {
-		return marks;
+	public Set<Product> getProducts() {
+		return Products;
 	}
 }

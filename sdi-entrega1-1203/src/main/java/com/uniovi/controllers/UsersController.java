@@ -69,7 +69,7 @@ private RolesService rolesService;
 
 		User activeUser = usersService.getUserByDni(dni);
 
-		model.addAttribute("markList", activeUser.getMarks());
+		model.addAttribute("productList", activeUser.getProducts());
 
 		return "home";
 	}
