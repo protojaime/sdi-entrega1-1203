@@ -41,19 +41,19 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 				</thead>
 				<tbody>
 
-					<tr th:each="mark : ${markList}">
+					<tr th:each="product : ${productList}">
 
-						<td th:text="${mark.id}">1</td>
+						<td th:text="${product.id}">1</td>
 
-						<td th:text="${mark.description}">Ejercicio 1</td>
+						<td th:text="${product.description}">Ejercicio 1</td>
 
-						<td th:text="${mark.score}">10</td>
+						<td th:text="${product.score}">10</td>
 
-						<td><a th:href="${'/mark/details/' + mark.id}">detalles</a></td>
+						<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
 
-						<td><a th:href="${'/mark/edit/' + mark.id}">modificar</a></td>
+						<td><a th:href="${'/product/edit/' + product.id}">modificar</a></td>
 
-						<td><a th:href="${'/mark/delete/' + mark.id}">eliminar</a></td>
+						<td><a th:href="${'/product/delete/' + product.id}">eliminar</a></td>
 
 					</tr>
 				</tbody>
