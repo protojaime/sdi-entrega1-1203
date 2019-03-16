@@ -14,6 +14,7 @@ public class User {
 	private String dni;
 	private String name;
 	private String lastName;
+	@Column(unique = true)
 	private String Email;
 	private Double Wallet;
 	

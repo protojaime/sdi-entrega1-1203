@@ -38,10 +38,10 @@ public class ProductsController {
 	} else {
 	Products = ProductsService.getProductsForUser(pageable, user);
 	}
-	model.addAttribute("ProductList", Products.getContent());
+	model.addAttribute("productList", Products.getContent());
 	model.addAttribute("page", Products);
 
-	return "Product/list";
+	return "product/list";
 	}
 	
 	
@@ -50,8 +50,8 @@ public class ProductsController {
 	String dni = principal.getName(); // DNI es el name de la autenticación
 	User user = usersService.getUserByDni(dni);
 	Page<Product> Products = ProductsService.getProductsForUser(pageable, user);
-	model.addAttribute("ProductList", Products.getContent() );
-	return "Product/list :: tableProducts";
+	model.addAttribute("productList", Products.getContent() );
+	return "product/list :: tableProducts";
 	}
 	
 	
@@ -64,8 +64,8 @@ public class ProductsController {
 
 	@RequestMapping("/product/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
-		model.addAttribute("Product", ProductsService.getProduct(id));
-		return "Product/details";
+		model.addAttribute("product", ProductsService.getProduct(id));
+		return "product/details";
 	}
 
 	@RequestMapping("/product/delete/{id}")
@@ -77,7 +77,7 @@ public class ProductsController {
 	@RequestMapping(value = "/product/add")
 	public String getProduct(Model model) {
 		model.addAttribute("usersList", usersService.getUsers());
-		return "Product/add";
+		return "product/add";
 	}
 
 	@RequestMapping(value="/product/{id}/sold", method=RequestMethod.GET)
@@ -94,9 +94,9 @@ public class ProductsController {
 	
 	@RequestMapping(value = "/product/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
-		model.addAttribute("Product", ProductsService.getProduct(id));
+		model.addAttribute("product", ProductsService.getProduct(id));
 		model.addAttribute("usersList", usersService.getUsers());
-		return "Product/edit";
+		return "product/edit";
 	}
 
 	@RequestMapping(value = "/product/edit/{id}", method = RequestMethod.POST)

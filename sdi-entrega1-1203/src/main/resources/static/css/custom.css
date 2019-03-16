@@ -4,12 +4,15 @@ html {
 	min-height: 100%;
 }
 
+
+/*
 body {
 	/* Margin bottom by footer height */
 	margin-bottom: 60px;
 }
-
+*/
 footer {
+	margin: 20px;
 	position: absolute;
 	bottom: 0;
 	width: 100%;
