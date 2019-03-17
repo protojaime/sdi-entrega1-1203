@@ -59,10 +59,10 @@ public class Product {
 		this.price = price;
 	}
 
-	public Product(String description, Double score, User user) {
+	public Product(String description, Double price, User user) {
 		super();
 		this.description = description;
-		this.price = score;
+		this.price = price;
 		this.user = user;
 	}
 
@@ -70,11 +70,11 @@ public class Product {
 		
 	}
 
-	public Product(String name,String description, Double score, User user) {
+	public Product(String name,String description, Double price, User user) {
 		super();
 		this.name=name;
 		this.description = description;
-		this.price = score;
+		this.price = price;
 		this.user = user;
 	}
 
@@ -92,14 +92,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Double getScore() {
-		return price;
-	}
-
-	public void setScore(Double score) {
-		this.price = score;
 	}
 
 	public User getUser() {

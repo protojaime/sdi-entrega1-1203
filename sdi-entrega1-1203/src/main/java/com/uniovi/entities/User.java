@@ -41,15 +41,11 @@ public class User {
 	private Set<Product> Products;
 
 	public String getPassword() {
-
 		return password;
-
 	}
 
 	public void setPassword(String password) {
-
 		this.password = password;
-
 	}
 
 	

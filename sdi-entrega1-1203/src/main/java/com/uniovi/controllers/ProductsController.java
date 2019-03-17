@@ -91,7 +91,7 @@ public class ProductsController {
 	return "redirect:/product/list";
 	}
 
-	
+	/*
 	@RequestMapping(value = "/product/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
 		model.addAttribute("product", ProductsService.getProduct(id));
@@ -102,15 +102,12 @@ public class ProductsController {
 	@RequestMapping(value = "/product/edit/{id}", method = RequestMethod.POST)
 	public String setEdit(Model model, @PathVariable Long id, @ModelAttribute Product Product) {
 		Product original = ProductsService.getProduct(id);
-		
-// modificar solo score y description
-		
-		original.setScore(Product.getScore());
+		original.setPrice(Product.getPrice());
 		original.setDescription(Product.getDescription());
 		ProductsService.addProduct(original);
 		return "redirect:/product/details/" + id;
 	}
-
+*/
 
 	public HttpSession getHttpSession() {
 		return httpSession;
