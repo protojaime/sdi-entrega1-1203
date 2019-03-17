@@ -33,6 +33,7 @@ public class ProductsController {
 	@RequestParam(value = "", required=false) String searchText){
 	String dni = principal.getName();
 	User user = usersService.getUserByEmail(dni);
+
 	Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
 	if (searchText != null && !searchText.isEmpty()) {
 	Products = ProductsService
@@ -42,7 +43,7 @@ public class ProductsController {
 	}
 	model.addAttribute("productList", Products.getContent());
 	model.addAttribute("page", Products);
-
+	model.addAttribute("wallet", user.getWallet());
 	return "product/list";
 	}
 	
@@ -52,6 +53,7 @@ public class ProductsController {
 	String dni = principal.getName(); // Email es el name de la autenticación
 	User user = usersService.getUserByEmail(dni);
 	Page<Product> Products = ProductsService.getProductsForUser(pageable, user);
+	model.addAttribute("wallet", user.getWallet());
 	model.addAttribute("productList", Products.getContent() );
 	return "product/list :: tableProducts";
 	}
@@ -70,6 +72,10 @@ public class ProductsController {
 
 	@RequestMapping("/product/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
 		model.addAttribute("product", ProductsService.getProduct(id));
 		return "product/details";
 	}
@@ -82,12 +88,18 @@ public class ProductsController {
 
 	@RequestMapping(value = "/product/add")
 	public String getProduct(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
 		model.addAttribute("usersList", usersService.getUsers());
 		return "product/add";
 	}
 
 	@RequestMapping(value="/product/{id}/sold", method=RequestMethod.GET)
 	public String setSoldTrue(Model model, @PathVariable Long id){
+		
+		
 	ProductsService.setProductSold(true, id);
 	return "redirect:/product/list";
 	}

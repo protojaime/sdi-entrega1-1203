@@ -125,7 +125,25 @@ Registrate
 <a href="/home" th:text="${#authentication.getPrincipal().getUsername()}">
  
 </a>
+/li>
+
+
+<li sec:authorize="isAuthenticated()">
+<a href="/home" th:text="${wallet}">
+</a>
+
 </li>
+
+
+
+
+
+
+
+
+
+
+
 
 <li sec:authorize="!isAuthenticated()">
  

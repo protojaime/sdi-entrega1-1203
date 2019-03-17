@@ -64,22 +64,29 @@ private RolesService rolesService;
 	public String home(Model model) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
 		String dni = auth.getName();       
 		User activeUser = usersService.getUserByEmail(dni);
-
-		model.addAttribute("productList", activeUser.getProducts());
 		model.addAttribute("wallet", activeUser.getWallet());
+		model.addAttribute("productList", activeUser.getProducts());
+
 		return "home";
 	}
 
 	@RequestMapping("/user/list")
 	public String getListado(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
 		model.addAttribute("usersList", usersService.getUsers());
 		return "user/list";
 	}
 	@RequestMapping(value="/user/add")
 	public String getUser(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
 	model.addAttribute("rolesList", rolesService.getRoles());
 	return "user/add";
 	}
@@ -93,6 +100,10 @@ private RolesService rolesService;
 
 	@RequestMapping("/user/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
 		model.addAttribute("user", usersService.getUser(id));
 		return "user/details";
 	}
@@ -106,6 +117,7 @@ private RolesService rolesService;
 	@RequestMapping(value = "/user/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {
 		User user = usersService.getUser(id);
+		model.addAttribute("wallet", user.getWallet());
 		model.addAttribute("user", user);
 		return "user/edit";
 	}
