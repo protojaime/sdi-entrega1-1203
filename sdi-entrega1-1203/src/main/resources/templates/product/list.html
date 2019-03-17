@@ -108,7 +108,7 @@ th:href="${'/product/edit/' + product.id}">modificar</a>
  
 <div sec:authorize="hasRole('ROLE_USER')" >
  
-<div th:if="${!product.sold}">
+<div th:if="${product.sold}">
  
 <button type="button" th:id="${'resendButton' + product.id}"
  
@@ -142,7 +142,7 @@ $.get( "/product/[[${product.id}]]/sold", function( data ) {
  
 </div>
  
-<div th:unless="${!product.sold}">
+<div th:unless="${product.sold}">
 <button type="button" th:id="${'noresendButton' + product.id}"
  
 class="btn btn-default">Vendido</button>

@@ -31,9 +31,9 @@ data-toggle="collapse" data-target="#myNavbar">
  
 <li><a href="/">Home</a></li>
  
-<li id= "products-menu" class="dropdown">
+<li id= "products-menu" class="dropdown" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
  
-<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#"  >
  
  
 Gestión de productos <span class="caret"></span>
@@ -41,12 +41,12 @@ Gestión de productos <span class="caret"></span>
 </a>
 <ul class="dropdown-menu">
  
-<li sec:authorize="hasRole('ROLE_ADMIN')" >
+<li >
  
 <a href="/product/add">Agregar Producto</a>
  
 </li>
-<li><a href="/product/list">Ver productos</a></li>
+<li><a href="/product/list">Ver productos a la venta</a></li>
  
 </ul>
  
@@ -114,6 +114,19 @@ Registrate
 </a>
  
 </li>
+
+
+
+
+
+
+<li sec:authorize="isAuthenticated()">
+
+<a href="/home" th:text="${#authentication.getPrincipal().getUsername()}">
+ 
+</a>
+</li>
+
 <li sec:authorize="!isAuthenticated()">
  
 <a href="/login" th:text="#{login.message}">

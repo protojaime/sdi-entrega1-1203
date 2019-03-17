@@ -59,18 +59,17 @@ private RolesService rolesService;
 	public String login(Model model) {
 		return "login";
 	}
-
+	
 	@RequestMapping(value = { "/home" }, method = RequestMethod.GET)
 	public String home(Model model) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		String dni = auth.getName();
-
+		String dni = auth.getName();       
 		User activeUser = usersService.getUserByEmail(dni);
 
 		model.addAttribute("productList", activeUser.getProducts());
-
+		model.addAttribute("wallet", activeUser.getWallet());
 		return "home";
 	}
 
