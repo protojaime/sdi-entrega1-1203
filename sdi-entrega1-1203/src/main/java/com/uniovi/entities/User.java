@@ -9,13 +9,10 @@ public class User {
 	@GeneratedValue
 	private long id;
 	private String role;
-
-	@Column(unique = true)
-	private String dni;
 	private String name;
 	private String lastName;
 	@Column(unique = true)
-	private String Email;
+	private String email;
 	private Double Wallet;
 	
 	public Double getWallet() {
@@ -27,11 +24,11 @@ public class User {
 	}
 
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 
 	private String password;
@@ -68,28 +65,21 @@ public class User {
 		this.passwordConfirm = passwordConfirm;
 
 	}
-	public User(String dni, String name, String lastName) {
+	
+	public User( String name, String lastName,String email) {
 		super();
-		this.dni = dni;
+
 		this.name = name;
 		this.lastName = lastName;
-		this.Wallet=100.0;
-	}
-	public User(String dni, String name, String lastName,String email) {
-		super();
-		this.dni = dni;
-		this.name = name;
-		this.lastName = lastName;
-		this.Email=email;
+		this.email=email;
 		this.Wallet=100.0;
 		
 	}
-	public User(String dni, String name, String lastName,String email, Double Wallet) {
+	public User( String name, String lastName,String email, Double Wallet) {
 		super();
-		this.dni = dni;
 		this.name = name;
 		this.lastName = lastName;
-		this.Email=email;
+		this.email=email;
 		this.Wallet=Wallet;
 	}
 		
@@ -108,13 +98,6 @@ public class User {
 		this.id = id;
 	}
 
-	public String getDni() {
-		return dni;
-	}
-
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 
 	public String getName() {
 		return name;

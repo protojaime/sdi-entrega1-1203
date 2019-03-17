@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +31,8 @@ public class ProductsController {
 	@RequestMapping("/product/list")
 	public String getList(Model model, Pageable pageable, Principal principal, 
 	@RequestParam(value = "", required=false) String searchText){
-	String dni = principal.getName(); // DNI es el name de la autenticación
-	User user = usersService.getUserByDni(dni);
+	String dni = principal.getName();
+	User user = usersService.getUserByEmail(dni);
 	Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
 	if (searchText != null && !searchText.isEmpty()) {
 	Products = ProductsService
@@ -48,7 +50,7 @@ public class ProductsController {
 	@RequestMapping("/product/list/update")
 	public String updateList(Model model, Pageable pageable, Principal principal){
 	String dni = principal.getName(); // DNI es el name de la autenticación
-	User user = usersService.getUserByDni(dni);
+	User user = usersService.getUserByEmail(dni);
 	Page<Product> Products = ProductsService.getProductsForUser(pageable, user);
 	model.addAttribute("productList", Products.getContent() );
 	return "product/list :: tableProducts";
@@ -58,6 +60,10 @@ public class ProductsController {
 	
 	@RequestMapping(value = "/product/add", method = RequestMethod.POST)
 	public String setProduct(@ModelAttribute Product Product) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String name = auth.getName();
+	User user=usersService.getUserByEmail(name);
+	Product.setUser(user);
 		ProductsService.addProduct(Product);
 		return "redirect:/product/list";
 	}

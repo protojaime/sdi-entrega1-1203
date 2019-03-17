@@ -20,22 +20,22 @@ public class InsertSampleDataService {
 	private RolesService rolesService;
 	@PostConstruct
 	public void init() {
-	User user1 = new User("99999990A", "Pedro", "Díaz","testEmail1@Gmail.com",333.0);
+	User user1 = new User( "Pedro", "Díaz","testEmail1@Gmail.com",333.0);
 	user1.setPassword("123456");
 	user1.setRole(rolesService.getRoles()[0]);
-	User user2 = new User("99999991B", "Lucas", "Núñez","testEmail2@Gmail.com");
+	User user2 = new User("Lucas", "Núñez","testEmail2@Gmail.com");
 	user2.setPassword("123456");
 	user2.setRole(rolesService.getRoles()[0]);
-	User user3 = new User("99999992C", "María", "Rodríguez","testEmail3@Gmail.com");
+	User user3 = new User( "María", "Rodríguez","testEmail3@Gmail.com");
 	user3.setPassword("123456");
 	user3.setRole(rolesService.getRoles()[0]);
-	User user4 = new User("99999993D", "Marta", "Almonte","testEmail4@Gmail.com");
+	User user4 = new User("Marta", "Almonte","testEmail4@Gmail.com");
 	user4.setPassword("123456");
 	user4.setRole(rolesService.getRoles()[0]);
-	User user5 = new User("99999977E", "Pelayo", "Valdes","testEmail6@Gmail.com");
+	User user5 = new User( "Pelayo", "Valdes","testEmail6@Gmail.com");
 	user5.setPassword("123456");
 	user5.setRole(rolesService.getRoles()[0]);
-	User user6 = new User("99999988F", "Edward", "Núñez","Admin@Gmail.com");
+	User user6 = new User("Edward", "Núñez","Admin@Gmail.com");
 	user6.setPassword("123456");
 	user6.setRole(rolesService.getRoles()[1]);
 		Set<Product> user1Products = new HashSet<Product>() {

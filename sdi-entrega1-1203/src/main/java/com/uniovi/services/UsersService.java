@@ -33,8 +33,8 @@ public class UsersService {
 		usersRepository.save(user);
 	}
 
-	public User getUserByDni(String dni) {
-		return usersRepository.findByDni(dni);
+	public User getUserByEmail(String dni) {
+		return usersRepository.findByEmail(dni);
 	}
 
 	public void deleteUser(Long id) {

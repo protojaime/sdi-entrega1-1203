@@ -49,7 +49,7 @@ private RolesService rolesService;
 	 
 	usersService.addUser(user);
 	 
-	securityService.autoLogin(user.getDni(), user.getPasswordConfirm());
+	securityService.autoLogin(user.getEmail(), user.getPasswordConfirm());
 	 
 	return "redirect:home";
 	}
@@ -67,7 +67,7 @@ private RolesService rolesService;
 
 		String dni = auth.getName();
 
-		User activeUser = usersService.getUserByDni(dni);
+		User activeUser = usersService.getUserByEmail(dni);
 
 		model.addAttribute("productList", activeUser.getProducts());
 

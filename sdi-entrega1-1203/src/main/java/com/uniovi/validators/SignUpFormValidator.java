@@ -15,12 +15,9 @@ return User.class.equals(aClass);
 @Override
 public void validate(Object target, Errors errors) {
 User user = (User) target;
-ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dni", "Error.empty");
-if (user.getDni().length() < 5 || user.getDni().length() > 24) {
-errors.rejectValue("dni", "Error.signup.dni.length");
-}
-if (usersService.getUserByDni(user.getDni()) != null) {
-errors.rejectValue("dni", "Error.signup.dni.duplicate");
+
+if (usersService.getUserByEmail(user.getEmail()) != null) {
+errors.rejectValue("email", "Error.signup.email.duplicate");
 }
 if (user.getName().length() < 5 || user.getName().length() > 24) {
 errors.rejectValue("name", "Error.signup.name.length");

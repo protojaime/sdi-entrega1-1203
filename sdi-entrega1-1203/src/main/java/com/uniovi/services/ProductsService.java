@@ -38,9 +38,9 @@ public class ProductsService {
 	
 	public void setProductSold(boolean revised,Long id){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String dni = auth.getName();
+		String email = auth.getName();
 		Product Product = ProductsRepository.findById(id).get();
-		if(Product.getUser().getDni().equals(dni) ) {
+		if(Product.getUser().getEmail().equals(email) ) {
 		ProductsRepository.updateSold(revised, id);
 		}
 	}

@@ -20,14 +20,14 @@ private UsersRepository usersRepository;
  
 public UserDetails loadUserByUsername(String dni) throws UsernameNotFoundException{
  
-User user = usersRepository.findByDni(dni);
+User user = usersRepository.findByEmail(dni);
  
  
 Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
  
 grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole()));
  
-return new org.springframework.security.core.userdetails.User(user.getDni(), user.getPassword(), grantedAuthorities);
+return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
  
 }
 }

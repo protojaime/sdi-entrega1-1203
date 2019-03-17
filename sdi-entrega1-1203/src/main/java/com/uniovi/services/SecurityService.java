@@ -37,9 +37,9 @@ public class SecurityService {
 
 	}
 
-	public void autoLogin(String dni, String password) {
+	public void autoLogin(String email, String password) {
 
-		UserDetails userDetails = userDetailsService.loadUserByUsername(dni);
+		UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
 		UsernamePasswordAuthenticationToken aToken = new UsernamePasswordAuthenticationToken(
 
@@ -51,7 +51,7 @@ public class SecurityService {
 
 			SecurityContextHolder.getContext().setAuthentication(aToken);
 
-			logger.debug(String.format("Auto login %s successfully!", dni));
+			logger.debug(String.format("Auto login %s successfully!", email));
 
 		}
 
