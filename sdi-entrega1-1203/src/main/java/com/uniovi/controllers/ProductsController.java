@@ -38,6 +38,10 @@ public class ProductsController {
 	if (searchText != null && !searchText.isEmpty()) {
 	Products = ProductsService
 	.searchProductsByDescriptionAndNameForUser(pageable, searchText, user);
+	if(Products.isEmpty()) {
+		Products = ProductsService.getProductsForUser(pageable, user);
+	}
+	
 	} else {
 	Products = ProductsService.getProductsForUser(pageable, user);
 	}
