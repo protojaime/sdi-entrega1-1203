@@ -90,10 +90,14 @@ $("#tableProducts").load('/product/list/update');
 <tr th:each="product : ${productList}">
  
 <td th:text="${product.id}"> 1</td>
+
+<td th:text="${product.name}"> 1</td>
  
 <td th:text="${product.description}"> Ejercicio 1</td>
  
 <td th:text="${product.price}">10</td>
+
+<td th:text="${product.DueToDate}"> 1/1/01</td>
  
 <td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
  
@@ -104,18 +108,18 @@ th:href="${'/product/edit/' + product.id}">modificar</a>
  
 <div sec:authorize="hasRole('ROLE_USER')" >
  
-<div th:if="${product.sold}">
+<div th:if="${!product.sold}">
  
 <button type="button" th:id="${'resendButton' + product.id}"
  
-class="btn btn-info">Reenviar</button>
+class="btn btn-info">comprar</button>
  
 <script th:inline="javascript">
  
 /*<![CDATA[*/
 $( "#resendButton[[${product.id}]]" ).click(function() {
  
-$.get( "/product/[[${product.id}]]/noresend", function( data ) {
+$.get( "/product/[[${product.id}]]/sold", function( data ) {
 	var numberPage = [[${param.page}]];
 	 
 	var urlUpdate = '/product/list/update';
@@ -138,10 +142,10 @@ $.get( "/product/[[${product.id}]]/noresend", function( data ) {
  
 </div>
  
-<div th:unless="${product.sold}">
+<div th:unless="${!product.sold}">
 <button type="button" th:id="${'noresendButton' + product.id}"
  
-class="btn btn-default">No reenviar</button>
+class="btn btn-default">Vendido</button>
  
 <script th:inline="javascript">
  

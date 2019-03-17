@@ -65,24 +65,22 @@ public class ProductsService {
 	
 	public Page<Product> getProductsForUser(Pageable pageable, User user){
 		Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
-		if ( user.getRole().equals("ROLE_USER")) {
-		Products = ProductsRepository.findAllByUser(pageable, user);
-		} 
-		if ( user.getRole().equals("ROLE_ADMIN")){
-		Products = getProducts(pageable);
-		}
+	//	if ( user.getRole().equals("ROLE_USER")) {
+		//Products = ProductsRepository.findAllByUser(pageable, user);	
+		//if ( user.getRole().equals("ROLE_ADMIN")){
+	    Products = getProducts(pageable);	
 		return Products;
 		}
-		public Page<Product> searchProductsByDescriptionAndNameForUser (Pageable pageable, 
-		String searchText, User user){
+	
+		public Page<Product> searchProductsByDescriptionAndNameForUser (Pageable pageable, String searchText, User user){
 		Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
 		searchText = "%"+searchText+"%";
-		if ( user.getRole().equals("ROLE_USER")) {
-		Products = ProductsRepository.searchByDescriptionNameAndUser(pageable, searchText, user);
-		} 
-		if ( user.getRole().equals("ROLE_ADMIN")){
+	//	if ( user.getRole().equals("ROLE_USER")) {
+	//	Products = ProductsRepository.searchByDescriptionNameAndUser(pageable, searchText, user);
+	//	} 
+		//if ( user.getRole().equals("ROLE_ADMIN")){
 		Products = ProductsRepository.searchByDescriptionAndName(pageable, searchText);
-		}
+		
 		return Products;
 		}
 		public Page<Product> getProducts(Pageable pageable){

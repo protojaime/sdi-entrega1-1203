@@ -49,7 +49,7 @@ public class ProductsController {
 	
 	@RequestMapping("/product/list/update")
 	public String updateList(Model model, Pageable pageable, Principal principal){
-	String dni = principal.getName(); // DNI es el name de la autenticación
+	String dni = principal.getName(); // Email es el name de la autenticación
 	User user = usersService.getUserByEmail(dni);
 	Page<Product> Products = ProductsService.getProductsForUser(pageable, user);
 	model.addAttribute("productList", Products.getContent() );
