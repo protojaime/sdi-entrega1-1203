@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import com.uniovi.entities.*;
 import com.uniovi.repositories.ProductsRepository;
+import com.uniovi.repositories.UsersRepository;
 
 
 @Service
@@ -29,6 +30,10 @@ public class ProductsService {
 	@Autowired
 	private ProductsRepository ProductsRepository;
 
+	@Autowired
+	private UsersRepository usersRepository;
+	
+	
 	public List<Product> getProducts() {
 		
 		List<Product> Products = new ArrayList<Product>();
@@ -45,7 +50,23 @@ public class ProductsService {
 		}
 	}
 
-	
+	public boolean addProductToBroughtOfUser(Product Product, User user) {
+		
+		if(user.getWallet()-Product.getPrice()>0) {
+		usersRepository.UpdateWallet(user.getWallet()-Product.getPrice(), user.getId());
+		
+		ProductsRepository.updateSold(true, Product.getId());
+		
+		ProductsRepository.updateBuyer(user.getId() ,Product.getId());
+		return true;
+			}
+		return false;
+	}
+	public boolean addProductToBroughtOfUserbyID(Long Product, Long user) {
+		Product a=ProductsRepository.findById(Product).get();
+        User b=usersRepository.findById(user).get();
+		return addProductToBroughtOfUser(a,b);
+			}
 	
 	@SuppressWarnings("unchecked")
 	public Product getProduct(Long id) {
@@ -58,10 +79,6 @@ public class ProductsService {
 		httpSession.setAttribute("consultedList", consultedList);
 		return ProductObtained;
 	}
-
-
-	
-	
 	
 	public Page<Product> getProductsForUser(Pageable pageable, User user){
 		Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
@@ -71,6 +88,15 @@ public class ProductsService {
 	    Products = getProducts(pageable);	
 		return Products;
 		}
+	public List<Product> findAllBoughtByUser(User user){
+		List<Product> Products = new ArrayList<Product>();
+		ProductsRepository.findAllBoughtByUser(user).forEach(Products::add);
+		return Products;
+	}
+		
+	
+	
+	
 	
 		public Page<Product> searchProductsByDescriptionAndNameForUser (Pageable pageable, String searchText, User user){
 		Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
@@ -94,6 +120,9 @@ public class ProductsService {
 // Si en Id es null le asignamos el ultimo + 1 de la lista
 		ProductsRepository.save(Product);
 	}
+	
+	
+	
 
 	public void deleteProduct(Long id) {
 		ProductsRepository.deleteById(id);

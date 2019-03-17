@@ -52,6 +52,11 @@ public class InsertSampleDataService {
 			}
 		};
 		user1.setProducts(user1Products);
+		
+
+		
+		
+		
 		Set<Product> user2Products = new HashSet<Product>() {
 			/**
 			 * 
@@ -66,6 +71,9 @@ public class InsertSampleDataService {
 			}
 		};
 		user2.setProducts(user2Products);
+		
+		
+		
 		Set<Product> user3Products = new HashSet<Product>() {
 			/**
 			 * 
@@ -81,6 +89,27 @@ public class InsertSampleDataService {
 			}
 		};
 		user3.setProducts(user3Products);
+		
+		
+		Product test = new Product("Producto 9","Descripción producto 9",  2.0, user3);
+		test.setBuyeruser(user1);
+		test.setSold(true);
+		Set<Product> user1BProducts = new HashSet<Product>() {
+			/**
+			 * 
+			 */
+		
+			private static final long serialVersionUID = -2178688001629161061L;
+
+			{
+				;
+				add(test);
+				add(new Product("Producto 10","Descripción producto 10",  30.0, user3));
+				add(new Product("Producto 11","Descripción producto 11",  32.0, user3));
+				add(new Product("Producto 12","Descripción producto 12",  556.0, user3));
+			}
+		};
+		
 		Set<Product> user4Products = new HashSet<Product>() {
 			/**
 			 * 
@@ -93,6 +122,8 @@ public class InsertSampleDataService {
 				add(new Product("Producto 15","Descripción producto 15",  2.20, user4));
 				add(new Product("Producto 16","Descripción producto 16",  55.30, user4));
 			}
+			
+			
 		};
 		user4.setProducts(user4Products);
 		usersService.addUser(user1);
@@ -101,5 +132,8 @@ public class InsertSampleDataService {
 		usersService.addUser(user4);
 		usersService.addUser(user5);
 		usersService.addUser(user6);
+		
+		
+		
 	}
 }

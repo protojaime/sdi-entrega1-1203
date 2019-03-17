@@ -52,6 +52,16 @@ public class ProductsController {
 	}
 	
 	
+	@RequestMapping("/product/bought")
+	public String getBoughtList(Model model, Principal principal){
+	String dni = principal.getName();
+	User user = usersService.getUserByEmail(dni);
+	model.addAttribute("productList", ProductsService.findAllBoughtByUser(user));
+	model.addAttribute("wallet", user.getWallet());
+	return "product/bought";
+	}
+	
+	
 	@RequestMapping("/product/list/update")
 	public String updateList(Model model, Pageable pageable, Principal principal){
 	String dni = principal.getName(); // Email es el name de la autenticación
@@ -103,16 +113,38 @@ public class ProductsController {
 	@RequestMapping(value="/product/{id}/sold", method=RequestMethod.GET)
 	public String setSoldTrue(Model model, @PathVariable Long id){
 		
-		
-	ProductsService.setProductSold(true, id);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+	//ProductsService.setProductSold(true, id);
+	boolean a= ProductsService.addProductToBroughtOfUserbyID(id,activeUser.getId());
+	
+	if (a) {
 	return "redirect:/product/list";
 	}
+	else {
+		return "redirect:/product/nomoney";
+	}
+	}
+	@RequestMapping(value= "/product/nomoney", method=RequestMethod.GET)
+	public String NoMoneyScreen(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String dni = auth.getName();       
+		User activeUser = usersService.getUserByEmail(dni);
+		model.addAttribute("wallet", activeUser.getWallet());
+	
+		return"/product/nomoney";
+	}
+	
+	
+	
+	/*
 	@RequestMapping(value="/product/{id}/nosold", method=RequestMethod.GET)
 	public String setSoldFalse(Model model, @PathVariable Long id){
 	ProductsService.setProductSold(false, id);
 	return "redirect:/product/list";
 	}
-
+*/
 	/*
 	@RequestMapping(value = "/product/edit/{id}")
 	public String getEdit(Model model, @PathVariable Long id) {

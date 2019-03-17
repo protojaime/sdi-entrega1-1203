@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="fragments/head" />
+<head th:replace="fragments/head"/>
 <body>
-	<nav th:replace="fragments/nav" />
-<div class="container" style="text-align: center">
-<h2 th:text="#{welcome.message}"></h2>
-<h3>Esta es una zona privada de la web</h3>
-<p>
+<!-- Barra de Navegación superior -->
+<nav th:replace="fragments/nav"/>
+<div class="container">
  
-Usuario Autenticado como : 
- 
-<span sec:authentication="principal.username"
- 
- 
-th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
-</p>
 
-		<p>Productos del usuario</p>
+
+
+
+		<p>Productos comprados pòr del usuario</p>
 
 		<div class="table-responsive">
 
@@ -51,10 +45,6 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 
 						<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
 
-						<td><a th:href="${'/product/edit/' + product.id}">modificar</a></td>
-
-						<td><a th:href="${'/product/delete/' + product.id}">eliminar</a></td>
-
 					</tr>
 				</tbody>
 
@@ -66,6 +56,7 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 
 
 	</div>
-	<!-- <footer th:replace="fragments/footer" /> -->
+<footer th:replace="fragments/footer"/>
+
 </body>
 </html>

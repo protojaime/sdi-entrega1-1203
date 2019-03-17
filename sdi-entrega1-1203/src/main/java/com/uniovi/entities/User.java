@@ -15,6 +15,21 @@ public class User {
 	private String email;
 	private Double Wallet;
 	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private Set<Product> Products;
+
+	@OneToMany(mappedBy = "buyeruser", cascade = CascadeType.ALL)
+	private Set<Product> BoughtProducts;
+
+	
+	public Set<Product> getBoughtProducts() {
+		return BoughtProducts;
+	}
+
+	public void setBoughtProducts(Set<Product> boughtProducts) {
+		BoughtProducts = boughtProducts;
+	}
+
 	public Double getWallet() {
 		return Wallet;
 	}
@@ -34,9 +49,7 @@ public class User {
 	private String password;
 	@Transient // propiedad que no se almacena e la tabla.
 	private String passwordConfirm;
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Product> Products;
-
+	
 	public String getPassword() {
 		return password;
 	}

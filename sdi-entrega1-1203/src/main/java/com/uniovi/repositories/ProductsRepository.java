@@ -1,5 +1,7 @@
 package com.uniovi.repositories;
 
+import java.util.Set;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,10 +19,20 @@ public interface ProductsRepository extends CrudRepository<Product, Long>{
 			@Query("SELECT r FROM Product r WHERE r.user = ?1 ORDER BY r.id ASC ")
 			Page<Product> findAllByUser(Pageable pageable, User user);
 			Page<Product> findAll(Pageable pageable); 
-
-	@Modifying
+			@Query("SELECT r FROM Product r WHERE r.buyeruser = ?1 ORDER BY r.id ASC ")
+			Set<Product> findAllBoughtByUser(User user);
+			
+			
+			
+			
+			@Modifying
 	@Transactional
 	@Query("UPDATE Product SET sold = ?1 WHERE id = ?2")
 	void updateSold(Boolean resend, Long id);
+	
+			@Modifying
+			@Transactional
+	@Query("UPDATE Product SET buyeruser_id = ?1 WHERE id = ?2")
+	void updateBuyer(Long id, long id2);
 
 }

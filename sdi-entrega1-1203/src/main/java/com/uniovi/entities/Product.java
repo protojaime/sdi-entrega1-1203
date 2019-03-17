@@ -18,7 +18,23 @@ public class Product {
 	private Double price;
 	private Date DueToDate;
 	private Boolean sold;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
+	@ManyToOne
+	@JoinColumn(name = "buyeruser_id")
+	private User buyeruser;
 	
+	
+	
+	public User getBuyeruser() {
+		return buyeruser;
+	}
+
+	public void setBuyeruser(User buyeruser) {
+		this.buyeruser = buyeruser;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -45,9 +61,6 @@ public class Product {
 		this.sold = sold;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
 
 
 
