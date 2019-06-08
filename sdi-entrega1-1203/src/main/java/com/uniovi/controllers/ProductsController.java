@@ -133,7 +133,7 @@ public class ProductsController {
 		User activeUser = usersService.getUserByEmail(dni);
 		model.addAttribute("wallet", activeUser.getWallet());
 	
-		return"/product/nomoney";
+		return"product/nomoney";
 	}
 	
 	

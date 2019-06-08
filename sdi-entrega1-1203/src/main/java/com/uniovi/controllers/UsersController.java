@@ -1,5 +1,9 @@
 package com.uniovi.controllers;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -77,10 +81,24 @@ private RolesService rolesService;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String dni = auth.getName();       
 		User activeUser = usersService.getUserByEmail(dni);
-		model.addAttribute("wallet", activeUser.getWallet());
+		model.addAttribute("wallet", activeUser.getWallet());		
 		model.addAttribute("usersList", usersService.getUsers());
+		model.addAttribute("tobedeleted", new ArrayList<Long>()   );
 		return "user/list";
 	}
+	
+	
+	@RequestMapping(value = "/user/massdeletion", method = RequestMethod.POST)
+	public String massDeleteUsers(@ModelAttribute List<Long> userList) {
+		for(Long l:userList) {
+			usersService.deleteUser(l);
+		}
+		
+		return "redirect:/user/list";
+	}
+	
+	
+	
 	@RequestMapping(value="/user/add")
 	public String getUser(Model model){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -91,7 +109,9 @@ private RolesService rolesService;
 	return "user/add";
 	}
 
+	
 
+	
 	@RequestMapping(value = "/user/add", method = RequestMethod.POST)
 	public String setUser(@ModelAttribute User user) {
 		usersService.addUser(user);

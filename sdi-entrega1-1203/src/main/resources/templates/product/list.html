@@ -108,9 +108,7 @@ $("#tableProducts").load('/product/list/update');
  <div th:unless="${product.sold}">
 
  
-<button type="button" th:id="${'resendButton' + product.id}"
- 
-class="btn btn-info">comprar</button>
+<button type="button" th:id="${'resendButton' + product.id}" class="btn btn-info">comprar</button>
  
 <script th:inline="javascript">
  
@@ -122,15 +120,19 @@ $.get( "/product/[[${product.id}]]/sold", function( data ) {
 	 
 	var urlUpdate = '/product/list/update';
 	 
-	 
 	if ( numberPage != null ){
 	 
 	urlUpdate += "?page="+numberPage[0];
 	 
 	}
 	$("#tableProducts").load(urlUpdate);
-
 });
+if(){
+	
+	
+}
+
+
  
 });
 /*]]>*/

@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 
 	.antMatchers("/product/delete/*").hasAuthority("ROLE_USER")
 	 
-	.antMatchers("/product/**").hasAnyAuthority("ROLE_USER")
+	.antMatchers("/product/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
 	 
 	.antMatchers("/user/**").hasAnyAuthority("ROLE_ADMIN")
 	 
