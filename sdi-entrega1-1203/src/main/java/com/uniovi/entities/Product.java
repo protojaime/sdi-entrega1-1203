@@ -89,6 +89,7 @@ public class Product {
 		this.description = description;
 		this.price = price;
 		this.user = user;
+		this.sold = false;
 	}
 
 	public Long getId() {

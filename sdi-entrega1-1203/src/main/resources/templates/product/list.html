@@ -104,61 +104,12 @@ $("#tableProducts").load('/product/list/update');
 <td>
 <div sec:authorize="hasRole('ROLE_USER')" >
  
- 
  <div th:unless="${product.sold}">
-
- 
-<button type="button" th:id="${'resendButton' + product.id}" class="btn btn-info">comprar</button>
- 
-<script th:inline="javascript">
- 
-/*<![CDATA[*/
-$( "#resendButton[[${product.id}]]" ).click(function() {
- 
-$.get( "/product/[[${product.id}]]/sold", function( data ) {
-	var numberPage = [[${param.page}]];
-	 
-	var urlUpdate = '/product/list/update';
-	 
-	if ( numberPage != null ){
-	 
-	urlUpdate += "?page="+numberPage[0];
-	 
-	}
-	$("#tableProducts").load(urlUpdate);
-});
-if(){
-	
-	
-}
-
-
- 
-});
-/*]]>*/
- 
-</script>
- 
- 
+<a th:href="${'/product/' + product.id + '/sold'}">comprar</a>
 </div>
- 
-<div th:if="${product.sold}">
-<button type="button" th:id="${'noresendButton' + product.id}"
- 
-class="btn btn-default">vendido</button>
- 
-<script th:inline="javascript">
- 
-/*<![CDATA[*/
-$( "#noresendButton[[${product.id}]]" ).click(function() {
- 
-
-});
-
-</script>
-
-
- 
+  <div th:if="${product.sold}">
+<i>vendido</i>
+</div>
 </div>
  
 </div>
