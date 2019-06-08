@@ -47,7 +47,7 @@ Gestión de productos <span class="caret"></span>
  
 </li>
 <li><a href="/product/list">Ver productos a la venta</a></li>
- 
+ <li><a href="/product/bought">Ver productos comprados</a></li>
 </ul>
  
 </li>
@@ -124,7 +124,7 @@ Registrate
 <a href="/home" th:text="${#authentication.getPrincipal().getUsername()}">
  
 </a>
-/li>
+</li>
 
 
 <li sec:authorize="isAuthenticated()">
