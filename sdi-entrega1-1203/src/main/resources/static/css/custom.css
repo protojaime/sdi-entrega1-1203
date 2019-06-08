@@ -1,4 +1,11 @@
 /* Sticky footer styles-------------------------------------------------- */
+
+*{
+
+color:#5f5f5f;
+  text-shadow: 0.01em 0.01em #afafaf;
+}
+
 html {
 	position: relative;
 	min-height: 100%;
@@ -14,7 +21,9 @@ body {
 .error{
 	color:red;
 }
-
+i{
+	color:blueviolet ;
+}
 
 footer {
 	margin-top: 60px;
