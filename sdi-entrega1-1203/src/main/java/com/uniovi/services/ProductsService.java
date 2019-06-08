@@ -109,6 +109,15 @@ public class ProductsService {
 		
 		return Products;
 		}
+		public List<Product> searchByDescriptionNameAndUser(String searchText, User user){
+			searchText = "%"+searchText+"%";
+		//	if ( user.getRole().equals("ROLE_USER")) {
+		//	Products = ProductsRepository.searchByDescriptionNameAndUser(pageable, searchText, user);
+		//	} 
+			//if ( user.getRole().equals("ROLE_ADMIN")){
+			return ProductsRepository.searchByDescriptionNameAndUser(searchText, user);
+			}
+		
 		public Page<Product> getProducts(Pageable pageable){
 		Page<Product> Products = ProductsRepository.findAll(pageable);
 		return Products;

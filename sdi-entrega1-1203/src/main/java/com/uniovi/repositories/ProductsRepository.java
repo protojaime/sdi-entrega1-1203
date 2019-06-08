@@ -1,5 +1,6 @@
 package com.uniovi.repositories;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.domain.Page;
@@ -16,6 +17,8 @@ public interface ProductsRepository extends CrudRepository<Product, Long>{
 			Page<Product> searchByDescriptionAndName(Pageable pageable, String seachtext);
 			@Query("SELECT r FROM Product r WHERE (LOWER(r.description) LIKE LOWER(?1) OR LOWER(r.user.name) LIKE LOWER(?1)) AND r.user = ?2 ")
 			Page<Product> searchByDescriptionNameAndUser(Pageable pageable, String seachtext, User user);
+		    @Query("SELECT r FROM Product r WHERE (LOWER(r.description) LIKE LOWER(?1) OR LOWER(r.name) LIKE LOWER(?1)) AND r.user = ?2 ")
+		    List<Product> searchByDescriptionNameAndUser(String seachtext, User user);
 			@Query("SELECT r FROM Product r WHERE r.user = ?1 ORDER BY r.id ASC ")
 			Page<Product> findAllByUser(Pageable pageable, User user);
 			Page<Product> findAll(Pageable pageable); 

@@ -5,21 +5,29 @@ import java.util.Set;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.uniovi.entities.Product;
 import com.uniovi.entities.User;
+import com.uniovi.repositories.ProductsRepository;
 
 @Service
 public class InsertSampleDataService {
 
+	
 	@Autowired
 	private UsersService usersService;
 	@SuppressWarnings("unused")
 	@Autowired
 	private ProductsService ProductsService;
 	@Autowired
+	private ProductsRepository ProductsRepository;
+	@Autowired
 	private RolesService rolesService;
 	@PostConstruct
 	public void init() {
+		
+		
+		
 	User user1 = new User( "Pedro", "Díaz","testEmail1@Gmail.com",333.0);
 	user1.setPassword("123456");
 	user1.setRole(rolesService.getRoles()[0]);
@@ -38,12 +46,9 @@ public class InsertSampleDataService {
 	User user6 = new User("Edward", "Núñez","Admin@Gmail.com");
 	user6.setPassword("123456");
 	user6.setRole(rolesService.getRoles()[1]);
-		Set<Product> user1Products = new HashSet<Product>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -5817860730374796753L;
-
+	
+	
+		Set user1Products = new HashSet<Product>() {
 			{
 				add(new Product("Producto 1","Descripción producto 1",  10.0, user1));
 				add(new Product("Producto 2","Descripción producto 2",  30.0, user1));
@@ -57,12 +62,7 @@ public class InsertSampleDataService {
 		
 		
 		
-		Set<Product> user2Products = new HashSet<Product>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 3837442574885109485L;
-
+		Set user2Products = new HashSet<Product>() {
 			{
 				add(new Product("Producto 5","Descripción producto 5",  12.0, user2));
 				add(new Product("Producto 6","Descripción producto 6",  320.0, user2));
@@ -74,12 +74,7 @@ public class InsertSampleDataService {
 		
 		
 		
-		Set<Product> user3Products = new HashSet<Product>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = -2278688001629161061L;
-
+		Set user3Products = new HashSet<Product>() {
 			{
 				;
 				add(new Product("Producto 9","Descripción producto 9",  2.0, user3));
@@ -91,31 +86,7 @@ public class InsertSampleDataService {
 		user3.setProducts(user3Products);
 		
 		
-		Product test = new Product("Producto 9","Descripción producto 9",  2.0, user3);
-		test.setBuyeruser(user1);
-		test.setSold(true);
-		Set<Product> user1BProducts = new HashSet<Product>() {
-			/**
-			 * 
-			 */
-		
-			private static final long serialVersionUID = -2178688001629161061L;
-
-			{
-				;
-				add(test);
-				add(new Product("Producto 10","Descripción producto 10",  30.0, user3));
-				add(new Product("Producto 11","Descripción producto 11",  32.0, user3));
-				add(new Product("Producto 12","Descripción producto 12",  556.0, user3));
-			}
-		};
-		
-		Set<Product> user4Products = new HashSet<Product>() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 6620321125893406991L;
-
+		Set user4Products = new HashSet<Product>() {
 			{
 				add(new Product("Producto 13","Descripción producto 13",  24.0, user4));
 				add(new Product("Producto 14","Descripción producto 14",  1.0, user4));
@@ -125,7 +96,9 @@ public class InsertSampleDataService {
 			
 			
 		};
+		
 		user4.setProducts(user4Products);
+		
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
@@ -133,6 +106,25 @@ public class InsertSampleDataService {
 		usersService.addUser(user5);
 		usersService.addUser(user6);
 		
+		Product P1= ProductsService.searchByDescriptionNameAndUser("Producto 13", user4).get(0);
+		P1.setBuyeruser(user1);
+		P1.setSold(true);
+		ProductsRepository.save(P1);
+		
+		Product P2= ProductsService.searchByDescriptionNameAndUser("Producto 9", user3).get(0);
+		P2.setBuyeruser(user1);
+		P2.setSold(true);
+		ProductsRepository.save(P2);
+		
+		Product P3= ProductsService.searchByDescriptionNameAndUser("Producto 5", user2).get(0);
+		P3.setBuyeruser(user1);
+		P3.setSold(true);
+		ProductsRepository.save(P3);
+		
+		Product P4= ProductsService.searchByDescriptionNameAndUser("Producto 14", user4).get(0);
+		P4.setBuyeruser(user2);
+		P4.setSold(true);
+		ProductsRepository.save(P4);
 		
 		
 	}

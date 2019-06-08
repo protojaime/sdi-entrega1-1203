@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface UsersRepository extends CrudRepository<User, Long> {
 	
 	User findByEmail(String email);
-
+	User findByName(String name);
 	
 	@Modifying
 @Transactional
