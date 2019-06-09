@@ -33,21 +33,21 @@ data-toggle="collapse" data-target="#myNavbar">
  
 <li id= "products-menu" class="dropdown" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
  
-<a class="dropdown-toggle" data-toggle="dropdown" href="#"  >
+<a class="dropdown-toggle" data-toggle="dropdown" href="#"  th:text="#{dropdown.products}">
  
  
-Gestión de productos <span class="caret"></span>
+Gestión de productos   <span class="caret"></span>
  
 </a>
 <ul class="dropdown-menu">
  
 <li >
  
-<a href="/product/add">Agregar Producto</a>
+<a href="/product/add"  th:text="#{button.addproduct}">Agregar Producto</a>
  
 </li>
-<li><a href="/product/list">Ver productos a la venta</a></li>
- <li><a href="/product/bought">Ver productos comprados</a></li>
+<li><a href="/product/list"  th:text="#{button.onsaleproduct}">Ver productos a la venta</a></li>
+ <li><a href="/product/bought"  th:text="#{button.boughtproduct}">Ver productos comprados</a></li>
 </ul>
  
 </li>
@@ -55,7 +55,7 @@ Gestión de productos <span class="caret"></span>
  
 sec:authorize="hasRole('ROLE_ADMIN')" >
  
-<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+<a class="dropdown-toggle" data-toggle="dropdown" href="#" th:text="#{dropdown.users}">
  
 Gestión de Usuarios <span class="caret"></span>
  
@@ -64,7 +64,7 @@ Gestión de Usuarios <span class="caret"></span>
  
 
  
-<li><a href="/user/list">Ver Usuarios</a></li>
+<li><a href="/user/list"  th:text="#{button.userlist}"> Ver Usuarios</a></li>
  
 </ul>
  
@@ -75,32 +75,35 @@ Gestión de Usuarios <span class="caret"></span>
 
 	<ul class="nav navbar-nav navbar-right">
 
-		<li class="dropdown"><a id="btnLanguage" href="
- 
-#"
-			class="dropdown-toggle" data-toggle="dropdown" role="button"
-			aria-haspopup="true" aria-expanded="false"> <span
-				th:text="#{language.change}"></span> <span class="caret"></span>
 
-		</a>
 
-			<ul id="languageDropdownMenuButton" class="dropdown-menu">
 
-				<li><a id="btnEnglish" value="EN"> <img
-						th:src="@{/img/if_uk_flag.png}"
-						style="border: 0; float: left; margin-right: 15px" /> <span
-						th:text="#{language.en}">Inglés</span>
 
-				</a></li>
 
-				<li><a id="btnSpanish" value="ES"> <img
-						th:src="@{/img/if_spain_flag.png}"
-						style="border: 0; float: left; margin-right: 15px" /> <span
-						th:text="#{language.es}">Español</span>
 
-				</a></li>
+<li class="dropdown"><a id="btnLanguage" href=" #"
+					class="dropdown-toggle" data-toggle="dropdown" role="button"
+					aria-haspopup="true" aria-expanded="false"> <span
+						th:text="#{language.change}"></span> <span class="caret"></span>
+				</a>
+					<ul id="languageDropdownMenuButton" class="dropdown-menu">
+						<li><a id="btnEnglish" value="EN"> <img
+								th:src="@{/img/if_uk_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.en}">Inglés</span>
+						</a></li>
+						<li><a id="btnSpanish" value="ES"> <img
+								th:src="@{/img/if_spain_flag.png}"
+								style="border: 0; float: left; margin-right: 15px" /> <span
+								th:text="#{language.es}">Español</span>
+						</a></li>
+					</ul></li>
 
-			</ul></li>
+
+
+
+
+
 
 		<li sec:authorize="!isAuthenticated()">
  
@@ -128,21 +131,10 @@ Registrate
 
 
 <li sec:authorize="isAuthenticated()">
-<a  th:text="${wallet}" id="wallet">
+<a th:text="${wallet}" id="wallet">
 </a>
 
 </li>
-
-
-
-
-
-
-
-
-
-
-
 
 <li sec:authorize="!isAuthenticated()">
  
@@ -157,7 +149,7 @@ Identifícate
 </li>
 <li sec:authorize="isAuthenticated()">
  
-<a href="/logout" >
+<a href="/logout" th:text="#{logout.message}">
  
 <span class="glyphicon glyphicon-log-out"></span>
  
