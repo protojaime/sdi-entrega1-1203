@@ -24,23 +24,13 @@
 
 						<th>Apellidos</th>
 
-
-<!-- aqui iria el correo -->
-						<th class="col-md-1"></th>
-
-
-						<th class="col-md-1"></th>
-
-						<th class="col-md-1"></th>
-
-						<th class="col-md-1"></th>
-
-						<th class="col-md-1"></th>
-
+<th>id</th>
 					</tr>
 
 				</thead>
  <form  method="post" action="/user/massdeletion" >
+				
+				
 				<tbody>
 
 					<tr th:each="user : ${usersList}">
@@ -55,6 +45,7 @@
 
 						<td><a th:href="${'/user/delete/' + user.id}">eliminar</a></td>
 
+<td><input  type="checkbox" id="CheckboxedUsers" name="CheckboxedUsers" th:value="${user.id}"> </td>
 <td>
 					</tr>
 

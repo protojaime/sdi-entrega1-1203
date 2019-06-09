@@ -83,17 +83,15 @@ private RolesService rolesService;
 		User activeUser = usersService.getUserByEmail(dni);
 		model.addAttribute("wallet", activeUser.getWallet());		
 		model.addAttribute("usersList", usersService.getUsers());
-		model.addAttribute("tobedeleted", new ArrayList<Long>()   );
 		return "user/list";
 	}
 	
 	
 	@RequestMapping(value = "/user/massdeletion", method = RequestMethod.POST)
-	public String massDeleteUsers(@ModelAttribute List<Long> userList) {
-		for(Long l:userList) {
-			usersService.deleteUser(l);
-		}
-		
+	public String massDeleteUsers(@RequestParam List<Long> CheckboxedUsers) {
+		for(Long id: CheckboxedUsers) {
+			usersService.deleteUser(id);	
+		} 
 		return "redirect:/user/list";
 	}
 	
