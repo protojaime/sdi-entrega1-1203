@@ -2,6 +2,7 @@ package com.uniovi.tests.pageobjects;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -51,7 +52,26 @@ public class PO_View {
 		List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, type, text, getTimeout());
 		return elementos;		
 	}
-	
+	   public static void clickDetails(WebDriver driver, int id) {
+		   
+		
+		   List<WebElement> buttonList = SeleniumUtils.EsperaCargaPagina(driver, "id", "details"+id,
+	                PO_View.getTimeout());
+	        buttonList.get(0).click();
+
+	    }
+	   public static void clickBuy(WebDriver driver, int id) {
+	        List<WebElement> buttonList = SeleniumUtils.EsperaCargaPagina(driver, "id", "buy"+id,
+	                PO_View.getTimeout());
+	        buttonList.get(0).click();
+
+	    }
+	   public static void clickDelete(WebDriver driver, int id) {
+	        List<WebElement> buttonList = SeleniumUtils.EsperaCargaPagina(driver, "id", "delete"+id,
+	                PO_View.getTimeout());
+	        buttonList.get(0).click();
+
+	    }
 	
 	
 	

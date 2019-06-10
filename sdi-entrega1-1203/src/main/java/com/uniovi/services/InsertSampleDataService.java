@@ -40,7 +40,7 @@ public class InsertSampleDataService {
 	User user4 = new User("Marta", "Almonte","testEmail4@Gmail.com");
 	user4.setPassword("123456");
 	user4.setRole(rolesService.getRoles()[0]);
-	User user5 = new User( "Pelayo", "Valdes","testEmail6@Gmail.com");
+	User user5 = new User( "Pelayo", "Valdes","testEmail5@Gmail.com");
 	user5.setPassword("123456");
 	user5.setRole(rolesService.getRoles()[0]);
 	User user6 = new User("Edward", "Núñez","Admin@Gmail.com");

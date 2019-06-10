@@ -70,17 +70,10 @@ $("#tableProducts").load('/product/list/update');
 <tr>
  
 <th class="col-md-1">id</th>
- 
+ <th class="col-md-1">nombre</th>
 <th>Descripción</th>
  
 <th>Precio</th>
- 
-<th class="col-md-1"> </th>
- 
-<th class="col-md-1"> </th>
-
-<th class="col-md-1"> </th>
- 
 </tr>
  
 </thead>
@@ -99,13 +92,13 @@ $("#tableProducts").load('/product/list/update');
 
 <td th:text="${product.DueToDate}"> 1/1/01</td>
  
-<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
+<td><a th:id="${'details' + product.id}" th:href="${'/product/details/' + product.id}">detalles</a></td>
  
 <td>
 <div sec:authorize="hasRole('ROLE_USER')" >
  
  <div th:unless="${product.sold}">
-<a th:href="${'/product/' + product.id + '/sold'}">comprar</a>
+<a th:id="${'buy' + product.id}" th:href="${'/product/' + product.id + '/sold'}">comprar</a>
 </div>
   <div th:if="${product.sold}">
 <i>vendido</i>

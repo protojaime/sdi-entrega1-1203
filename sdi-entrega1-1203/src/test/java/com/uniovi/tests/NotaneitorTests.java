@@ -102,8 +102,8 @@ public void PR05() {
 //Vamos al formulario de registro
 PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
 //Rellenamos el formulario.
-PO_RegisterView.fillForm(driver, "77777711A", "Josefo", "Perez", "77777", 
-"77777");
+PO_RegisterView.fillForm(driver, "testEmail11@Gmail.com", "Josefo", "Perez", "123456", 
+"123456");
 //Comprobamos que entramos en la sección privada
 PO_View.checkElement(driver, "text", "Notas del usuario");
 }
@@ -116,22 +116,22 @@ public void PR06() {
 //Vamos al formulario de registro
 	PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
 //Rellenamos el formulario.
-PO_RegisterView.fillForm(driver, "99999990A", "Josefo", "Perez", "77777", 
-"77777");
+PO_RegisterView.fillForm(driver, "testEmail11@Gmail.com", "Josefo", "Perez", "123456", 
+"123456");
 PO_View.getP();
 //COmprobamos el error de DNI repetido.
-PO_RegisterView.checkKey(driver, "Error.signup.dni.duplicate", 
+PO_RegisterView.checkKey(driver, "Error.signup.email.duplicate", 
 PO_Properties.getSPANISH() );
 //Rellenamos el formulario.
-PO_RegisterView.fillForm(driver, "99999990B", "Jose", "Perez", "77777", 
-"77777");
+PO_RegisterView.fillForm(driver, "testEmail12@Gmail.com", "Jose", "Perez", "123456", 
+"123456");
 //COmprobamos el error de Nombre corto .
 PO_RegisterView.checkKey(driver, "Error.signup.name.length", 
 PO_Properties.getSPANISH() );
 //Rellenamos el formulario.
-PO_RegisterView.fillForm(driver, "99999990B"
-, "Josefo", "Per", "77777", 
-"77777");
+PO_RegisterView.fillForm(driver, "testEmail13@Gmail.com"
+, "Josefo", "Per", "123456", 
+"123456");
 }
 //PRN. Loguearse con exito desde el ROl de Usuario, 99999990D, 123456
 @Test
@@ -139,21 +139,19 @@ public void PR07() {
 //Vamos al formulario de logueo.
 PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999990A" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 }
-
-
 
 @Test
 public void PR08() {
 //Vamos al formulario de logueo.
 	PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999993D" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 }
 
 
@@ -163,9 +161,9 @@ public void PR09() {
 //Vamos al formulario de logueo.
 	PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999988F" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 }
 
 
@@ -175,7 +173,7 @@ public void PR10() {
 //Vamos al formulario de logueo.
 	PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario erroneamwente
-PO_LoginView.fillForm(driver, "99999990A" , "fail" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "fail" );
 //COmprobamos que segimos en la pagina de logeo
 PO_View.checkElement(driver, "text", "Identifícate");
 }
@@ -187,9 +185,9 @@ public void PR11() {
 //Vamos al formulario de logueo.
 	PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999990A" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 //SALIMOS
 PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
 //COmprobamos que entramos en la pagina de login de nuevo
@@ -202,9 +200,9 @@ public void PR12() {
 //Vamos al formulario de logueo.
 	PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999990A" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 //Contamos el número de filas de notas
 List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", 
 "//tbody/tr", PO_View.getTimeout());
@@ -221,9 +219,9 @@ public void PR13() {
 //Vamos al formulario de logueo.
 	PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
 //Rellenamos el formulario
-PO_LoginView.fillForm(driver, "99999990A" , "123456" );
+PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Notas del usuario");
+PO_View.checkElement(driver, "text", "Gestión de productos");
 SeleniumUtils.esperarSegundos(driver, 1);
 //Contamos las notas
 By enlace = By.xpath("//td[contains(text(), 'Nota A2')]/following￾-sibling::*[2]");

@@ -22,13 +22,12 @@
 					<tr>
 
 						<th class="col-md-1">id</th>
-
+                        <th class="col-md-1">nombre</th>
 						<th>Descripción</th>
 
 						<th>Precio</th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
-						<th class="col-md-1"></th>
+						
+	
 
 					</tr>
 
@@ -38,12 +37,13 @@
 					<tr th:each="product : ${productList}">
 
 						<td th:text="${product.id}">1</td>
+                        <td th:text="${product.name}">1</td>
 
 						<td th:text="${product.description}">Ejercicio 1</td>
 
 						<td th:text="${product.price}">10</td>
 
-						<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
+						<td><a th:id="${'details' + product.id}" th:href="${'/product/details/' + product.id}">detalles</a></td>
 
 					</tr>
 				</tbody>

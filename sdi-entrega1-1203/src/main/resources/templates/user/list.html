@@ -43,9 +43,9 @@
 
                            <td th:text="${user.id}">-1</td>
 
-						<td><a th:href="${'/user/delete/' + user.id}">eliminar</a></td>
+						<td><a th:id="${'delete' + user.id}" th:href="${'/user/delete/' + user.id}">eliminar</a></td>
 
-<td><input  type="checkbox" id="CheckboxedUsers" name="CheckboxedUsers" th:value="${user.id}"> </td>
+<td><input type="checkbox" th:id="${'CheckboxedUser' + user.id}" name="CheckboxedUsers" th:value="${user.id}"> </td>
 <td>
 					</tr>
 

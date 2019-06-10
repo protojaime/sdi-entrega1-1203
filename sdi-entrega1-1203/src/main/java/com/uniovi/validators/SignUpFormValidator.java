@@ -15,7 +15,18 @@ return User.class.equals(aClass);
 @Override
 public void validate(Object target, Errors errors) {
 User user = (User) target;
-
+if(user.getEmail() == null || user.getEmail().isEmpty()) {
+errors.rejectValue("email", "Error.signup.emptyfield");
+}
+if(user.getName() == null || user.getName().isEmpty()) {
+errors.rejectValue("name", "Error.signup.emptyfield");
+}
+if(user.getLastName() == null || user.getLastName().isEmpty()) {
+errors.rejectValue("lastName", "Error.signup.emptyfield");
+}
+if(user.getPassword() == null || user.getPassword().isEmpty()) {
+errors.rejectValue("password", "Error.signup.emptyfield");
+}
 if (usersService.getUserByEmail(user.getEmail()) != null) {
 errors.rejectValue("email", "Error.signup.email.duplicate");
 }
