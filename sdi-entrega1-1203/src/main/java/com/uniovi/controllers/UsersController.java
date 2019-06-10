@@ -91,7 +91,7 @@ private RolesService rolesService;
 	public String massDeleteUsers(@RequestParam List<Long> CheckboxedUsers) {
 		for(Long id: CheckboxedUsers) {
 			usersService.deleteUser(id);	
-		} 
+		}
 		return "redirect:/user/list";
 	}
 	

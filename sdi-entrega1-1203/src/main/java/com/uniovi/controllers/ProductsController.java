@@ -36,21 +36,27 @@ public class ProductsController {
 
 	Page<Product> Products = new PageImpl<Product>(new LinkedList<Product>());
 	if (searchText != null && !searchText.isEmpty()) {
-	Products = ProductsService
-	.searchProductsByDescriptionAndNameForUser(pageable, searchText, user);
-	if(Products.isEmpty()) {
+	Products = ProductsService.searchProductsByDescriptionAndNameForUser(pageable, searchText, user);
+/*	if(Products.isEmpty()) {
 		Products = ProductsService.getProductsForUser(pageable, user);
 	}
 	
 	} else {
 	Products = ProductsService.getProductsForUser(pageable, user);
 	}
+	
+	*/
+	
+	
+	}
+	else {
+		Products = ProductsService.getProductsForUser(pageable, user);
+	}
 	model.addAttribute("productList", Products.getContent());
 	model.addAttribute("page", Products);
 	model.addAttribute("wallet", user.getWallet());
 	return "product/list";
 	}
-	
 	
 	@RequestMapping("/product/bought")
 	public String getBoughtList(Model model, Principal principal){

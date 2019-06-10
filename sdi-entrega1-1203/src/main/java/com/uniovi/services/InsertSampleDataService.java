@@ -27,7 +27,8 @@ public class InsertSampleDataService {
 	public void init() {
 		
 		
-		
+	User user0 = new User( "Pedro", "Díaz","testEmail0@Gmail.com",333.0);
+		user0.setPassword("123456");	
 	User user1 = new User( "Pedro", "Díaz","testEmail1@Gmail.com",333.0);
 	user1.setPassword("123456");
 	user1.setRole(rolesService.getRoles()[0]);
@@ -40,11 +41,17 @@ public class InsertSampleDataService {
 	User user4 = new User("Marta", "Almonte","testEmail4@Gmail.com");
 	user4.setPassword("123456");
 	user4.setRole(rolesService.getRoles()[0]);
-	User user5 = new User( "Pelayo", "Valdes","testEmail5@Gmail.com");
+	User user5 = new User( "Pelayo", "Valdes","testEmail5@Gmail.com",30.0);
 	user5.setPassword("123456");
 	user5.setRole(rolesService.getRoles()[0]);
 	User user6 = new User("Edward", "Núñez","Admin@Gmail.com");
 	user6.setPassword("123456");
+	User user7 = new User( "Pelayo", "Valdes","testEmail6@Gmail.com");
+	user7.setPassword("123456");
+	User user8 = new User( "Pelayo", "Valdes","testEmail7@Gmail.com");
+	user8.setPassword("123456");
+	User user9 = new User( "Pelayo", "Valdes","testEmail8@Gmail.com");
+	user9.setPassword("123456");
 	user6.setRole(rolesService.getRoles()[1]);
 	
 	
@@ -99,12 +106,16 @@ public class InsertSampleDataService {
 		
 		user4.setProducts(user4Products);
 		
+		usersService.addUser(user0);
 		usersService.addUser(user1);
 		usersService.addUser(user2);
 		usersService.addUser(user3);
 		usersService.addUser(user4);
 		usersService.addUser(user5);
 		usersService.addUser(user6);
+		usersService.addUser(user7);
+		usersService.addUser(user8);
+		usersService.addUser(user9);
 		
 		Product P1= ProductsService.searchByDescriptionNameAndUser("Producto 13", user4).get(0);
 		P1.setBuyeruser(user1);
@@ -125,7 +136,6 @@ public class InsertSampleDataService {
 		P4.setBuyeruser(user2);
 		P4.setSold(true);
 		ProductsRepository.save(P4);
-		
-		
+			
 	}
 }

@@ -14,13 +14,13 @@
  
 <div class="form-group">
  
-<input name="searchText" type="text" class="form-control" size="50"
+<input id="searchText" name="searchText" type="text" class="form-control" size="50"
  
 placeholder="Buscar por descripción o nombre del producto">
  
 </div>
  
-<button type="submit" class="btn btn-default">Buscar</button>
+<button type="submit" id="buscarButton" class="btn btn-default">Buscar</button>
 </form>
 
 <p>Las productos que actualmente figuran en el sistema son las siguientes:</p>
@@ -74,6 +74,8 @@ $("#tableProducts").load('/product/list/update');
 <th>Descripción</th>
  
 <th>Precio</th>
+
+<th>fecha</th>
 </tr>
  
 </thead>
@@ -82,26 +84,26 @@ $("#tableProducts").load('/product/list/update');
  
 <tr th:each="product : ${productList}">
  
-<td th:text="${product.id}"> 1</td>
+<td id="id" th:text="${product.id}"> 1</td>
 
 <td th:text="${product.name}"> 1</td>
  
 <td th:text="${product.description}"> Ejercicio 1</td>
  
-<td th:text="${product.price}">10</td>
+<td id="price" th:text="${product.price}">10</td>
 
 <td th:text="${product.DueToDate}"> 1/1/01</td>
  
-<td><a th:id="${'details' + product.id}" th:href="${'/product/details/' + product.id}">detalles</a></td>
+<td><a id="detalles" th:href="${'/product/details/' + product.id}">detalles</a></td>
  
 <td>
 <div sec:authorize="hasRole('ROLE_USER')" >
  
  <div th:unless="${product.sold}">
-<a th:id="${'buy' + product.id}" th:href="${'/product/' + product.id + '/sold'}">comprar</a>
+<a id="buy" th:href="${'/product/' + product.id + '/sold'}">comprar</a>
 </div>
   <div th:if="${product.sold}">
-<i>vendido</i>
+<i id="sold">vendido</i>
 </div>
 </div>
  

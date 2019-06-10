@@ -46,15 +46,15 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 
 					<tr th:each="product : ${productList}">
 
-						<td th:text="${product.id}">1</td>
+						<td id="id" th:text="${product.id}">1</td>
 
 						<td th:text="${product.description}">Ejercicio 1</td>
 
 						<td th:text="${product.price}">10</td>
 
-						<td><a th:href="${'/product/details/' + product.id}">detalles</a></td>
+						<td><a  id="detalles"  th:href="${'/product/details/' + product.id}">detalles</a></td>
 
-						<td><a th:href="${'/product/delete/' + product.id}">eliminar</a></td>
+						<td><a id="eliminar" th:href="${'/product/delete/' + product.id}">eliminar</a></td>
 
 					</tr>
 				</tbody>

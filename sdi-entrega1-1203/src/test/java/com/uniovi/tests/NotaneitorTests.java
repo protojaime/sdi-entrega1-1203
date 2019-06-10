@@ -253,7 +253,7 @@ elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'mark/add'
 //Pinchamos en agregar Nota.
 elementos.get(0).click();
 //Ahora vamos a rellenar la nota. //option[contains(@value, '4')]
-PO_PrivateView.fillFormAddMark(driver, 3, "Nota Nueva 1", "8");
+//PO_PrivateView.fillFormAddMark(driver, 3, "Nota Nueva 1", "8");
 //Esperamos a que se muestren los enlaces de paginación la lista de notas
 elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
 //Nos vamos a la última página
