@@ -77,24 +77,6 @@ static public void end() {
 //Cerramos el navegador al finalizar las pruebas
 driver.quit();
 }
-/*
-//PR01. Acceder a la página principal /
-@Test
-public void PR01() {
-PO_HomeView.checkWelcome(driver, PO_Properties.getSPANISH());
-}
-//PR02. OPción de navegación. Pinchar en el enlace Registro en la página home
-@Test
-public void PR02() {
-PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
-}
-//PR03. OPción de navegación. Pinchar en el enlace Identificate en la página home
-@Test
-public void PR03() {
-PO_NavView.clickOption(driver, "login", "class", "btn btn-primary");
-}
-*/
-
 
 //PR01. registro de usuario correcto
 @Test
@@ -801,18 +783,10 @@ PO_LoginView.fillForm(driver, "testEmail5@Gmail.com" , "123456" );
 driver.findElement(By.partialLinkText("Gestión de productos")).click();
 driver.findElement(By.partialLinkText("Ver productos comprados")).click(); 
 PO_View.checkElement(driver, "text", "Productos comprados pòr del usuario");
-//deberiamos tener 2 productos
+//deberiamos tener 2 productos, los comprados anteriormente
 List<WebElement> usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
 		  PO_View.getTimeout());
 assertEquals(2, usersList.size());
-//buscamos Producto 1, de precio 10, que compramos antes
-assertEquals("Producto 1",usersList.get(0).findElement(By.id("name")).getText());
-assertEquals("10.0",usersList.get(0).findElement(By.id("price")).getText());
-//buscamos Producto 3, de precio 20, que compramos antes
-assertEquals("Producto 3",usersList.get(0).findElement(By.id("name")).getText());
-assertEquals("20.0",usersList.get(0).findElement(By.id("price")).getText());
-
-
 }
 
 
@@ -824,6 +798,50 @@ PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish",
 PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
 SeleniumUtils.esperarSegundos(driver, 2);
 }
+
+//PR28. acceder a lista de administrador sin estar identificado
+@Test
+public void PR28() {
+//sin logearse, intentamos entrar en el listado de usuarios
+driver.get(URL+"/user/list");
+//COmprobamos que segimos en la pagina de logeo
+PO_View.checkElement(driver, "text", "Identificate");
+}
+//PR29. acceder a lista de ofertas propias sin ester identificado
+@Test
+public void PR29() {
+//sin logearse, intentamos entrar en el listado de ofertas propias en home
+driver.get(URL+"/home");
+//COmprobamos que segimos en la pagina de logeo
+PO_View.checkElement(driver, "text", "Identificate");
+}
+//PR30. acceder a lista de administrador como usuario normal
+@Test
+public void PR30() {
+	//Vamos al formulario de logueo.
+	PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
+	//Rellenamos el formulario
+	PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
+	//COmprobamos que entramos en la pagina privada del usuario
+	PO_View.checkElement(driver, "text", "testEmail1@Gmail.com");
+//sin ser administrador, intentamos entrar en el listado de usuarios
+driver.get(URL+"/user/list");
+//COmprobamos que salto el error de prohibido
+SeleniumUtils.esperarSegundos(driver, 1);
+List<WebElement> elementos = PO_View.checkElement(driver, "free", "/html/body/h1");
+assertEquals("HTTP Status 403 – Forbidden", elementos.get(0).getText()); 
+}
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

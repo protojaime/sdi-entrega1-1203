@@ -6,7 +6,7 @@
 <nav th:replace="fragments/nav"/>
 <div class="container">
  
-<h2>Productos</h2>
+<h2 th:text="#{products}">Productos</h2>
  
 
  
@@ -20,12 +20,12 @@ placeholder="Buscar por descripción o nombre del producto">
  
 </div>
  
-<button type="submit" id="buscarButton" class="btn btn-default">Buscar</button>
+<button type="submit" id="buscarButton" class="btn btn-default" th:text="#{button.search}">Buscar</button>
 </form>
 
-<p>Las productos que actualmente figuran en el sistema son las siguientes:</p>
+<p th:text="#{productlist.message}">Las productos que actualmente figuran en el sistema son las siguientes:</p>
 
-<button type="button" id="updateButton" class="btn btn-default">Actualizar</button>
+<button type="button" id="updateButton" class="btn btn-default" th:text="#{button.update}">Actualizar</button>
  
 <script th:inline="javascript">
 /*<![CDATA[*/
@@ -70,12 +70,10 @@ $("#tableProducts").load('/product/list/update');
 <tr>
  
 <th class="col-md-1">id</th>
- <th class="col-md-1">nombre</th>
-<th>Descripción</th>
- 
-<th>Precio</th>
-
-<th>fecha</th>
+ <th class="col-md-1" th:text="#{name}">nombre</th>
+<th class="col-md-1" th:text="#{description}">Descripción</th>
+<th class="col-md-1" th:text="#{price}">Precio</th>
+<th class="col-md-1" th:text="#{date}">fecha</th>
 </tr>
  
 </thead>
@@ -100,10 +98,10 @@ $("#tableProducts").load('/product/list/update');
 <div sec:authorize="hasRole('ROLE_USER')" >
  
  <div th:unless="${product.sold}">
-<a id="buy" th:href="${'/product/' + product.id + '/sold'}">comprar</a>
+<a id="buy" th:href="${'/product/' + product.id + '/sold'}" th:text="#{button.buy}">comprar</a>
 </div>
   <div th:if="${product.sold}">
-<i id="sold">vendido</i>
+<i id="sold" th:text="#{sold}">vendido</i>
 </div>
 </div>
  
@@ -113,7 +111,7 @@ $("#tableProducts").load('/product/list/update');
  
 <td><a sec:authorize="hasRole('ROLE_ADMIN')"
  
-th:href="${'/product/delete/' + product.id}">eliminar</a>
+th:href="${'/product/delete/' + product.id}" th:text="#{delete}">eliminar</a>
  
 </td>
  

@@ -10,7 +10,7 @@
 
 
 
-		<p>Productos comprados pòr del usuario</p>
+		<p  th:text="#{BoughtByUser.message}">Productos comprados pòr del usuario</p>
 
 		<div class="table-responsive">
 
@@ -21,11 +21,11 @@
 
 					<tr>
 
-						<th class="col-md-1">id</th>
-                        <th class="col-md-1">nombre</th>
-						<th>Descripción</th>
+						<th class="col-md-1" >id</th>
+                        <th class="col-md-1"  th:text="#{name}">nombre</th>
+						<th th:text="#{description}">Descripción</th>
 
-						<th>Precio</th>
+						<th th:text="#{price}">Precio</th>
 						
 	
 
@@ -37,11 +37,11 @@
 					<tr th:each="product : ${productList}">
 
 						<td th:text="${product.id}">1</td>
-                        <td th:text="${product.name}">1</td>
+                        <td id="name" th:text="${product.name}">1</td>
 
 						<td th:text="${product.description}">Ejercicio 1</td>
 
-						<td th:text="${product.price}">10</td>
+						<td id="price" th:text="${product.price}">10</td>
 
 						<td><a th:id="${'details' + product.id}" th:href="${'/product/details/' + product.id}">detalles</a></td>
 

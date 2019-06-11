@@ -5,21 +5,14 @@
 	<nav th:replace="fragments/nav" />
 <div class="container" style="text-align: center">
 <h2 th:text="#{welcome.message}"></h2>
-<h3>Esta es una zona privada de la web</h3>
-<p>
- 
-Usuario Autenticado como : 
- 
-<span sec:authentication="principal.username"
- 
- 
-th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
+<h3 th:text="#{privateZone.message}">Esta es una zona privada de la web</h3>
+<p th:text="#{userAs.message}">Usuario Autenticado como : <span sec:authentication="principal.username" th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 </p>
 
 
 
 
-		<p>Productos del usuario</p>
+		<p     th:text="#{userProducts.message}">Productos del usuario</p>
 
 		<div class="table-responsive">
 
@@ -32,9 +25,9 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 
 						<th class="col-md-1">id</th>
 
-						<th>Descripción</th>
+						<th class="col-md-1"  th:text="#{description}">Descripción</th>
 
-						<th>Precio</th>
+						<th class="col-md-1"  th:text="#{price}">Precio</th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
 						<th class="col-md-1"></th>
@@ -52,9 +45,9 @@ th:inline="text"> [[${#httpServletRequest.remoteUser}]] </span>
 
 						<td th:text="${product.price}">10</td>
 
-						<td><a  id="detalles"  th:href="${'/product/details/' + product.id}">detalles</a></td>
+						<td><a  id="detalles"  th:text="#{details}"  th:href="${'/product/details/' + product.id}">detalles</a></td>
 
-						<td><a id="eliminar" th:href="${'/product/delete/' + product.id}">eliminar</a></td>
+						<td><a id="eliminar"  th:text="#{delete}" th:href="${'/product/delete/' + product.id}">eliminar</a></td>
 
 					</tr>
 				</tbody>
