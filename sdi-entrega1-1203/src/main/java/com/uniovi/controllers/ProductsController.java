@@ -124,8 +124,8 @@ public class ProductsController {
 		User activeUser = usersService.getUserByEmail(dni);
 	//ProductsService.setProductSold(true, id);
 	boolean a= ProductsService.addProductToBroughtOfUserbyID(id,activeUser.getId());
-	
 	if (a) {
+		model.addAttribute("wallet", activeUser.getWallet());
 	return "redirect:/product/list";
 	}
 	else {

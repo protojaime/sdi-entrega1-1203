@@ -686,16 +686,18 @@ searchText.click();
 searchText.clear();
 searchText.sendKeys("Producto 3");
 driver.findElement(By.id("buscarButton")).click();
-//compramos el primer objeto, cuyo coste es 20 e id 5
+//compramos el primer objeto, cuyo coste es 20 y nombre producto 35
 List<WebElement> usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
         PO_View.getTimeout());
 assertEquals("20.0",usersList.get(0).findElement(By.id("price")).getText());
-assertEquals("5",usersList.get(0).findElement(By.id("id")).getText());
+assertEquals("Producto 3",usersList.get(0).findElement(By.id("name")).getText());
 usersList.get(0).findElement(By.id("buy")).click();
 //cartera de este usuario: 10
 assertEquals("10.0",driver.findElement(By.id("wallet")).getText());
 //objeto pasa a ser vendido, no tiene el elemento que clicamos antes
-usersList.get(0).findElement(By.id("sold"));
+usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+        PO_View.getTimeout());
+
 try {
 usersList.get(0).findElement(By.id("buy")).getText();
 }catch(NoSuchElementException e) {
@@ -721,16 +723,17 @@ searchText.click();
 searchText.clear();
 searchText.sendKeys("Producto 1");
 driver.findElement(By.id("buscarButton")).click();
-//compramos el primer objeto, cuyo coste es 20 e id 3
+//compramos el primer objeto, cuyo coste es 10 e id 3
 List<WebElement> usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
       PO_View.getTimeout());
-assertEquals("20.0",usersList.get(0).findElement(By.id("price")).getText());
-assertEquals("3",usersList.get(0).findElement(By.id("id")).getText());
+assertEquals("10.0",usersList.get(0).findElement(By.id("price")).getText());
+assertEquals("Producto 1",usersList.get(0).findElement(By.id("name")).getText());
 usersList.get(0).findElement(By.id("buy")).click();
 //cartera de este usuario: 10
 assertEquals("0.0",driver.findElement(By.id("wallet")).getText());
 //objeto pasa a ser vendido, no tiene el elemento que clicamos antes
-usersList.get(0).findElement(By.id("sold"));
+usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",PO_View.getTimeout());
+
 try {
 usersList.get(0).findElement(By.id("buy")).getText();
 }catch(NoSuchElementException e) {
@@ -776,8 +779,9 @@ searchText.clear();
 searchText.sendKeys(" 	Producto 2");
 driver.findElement(By.id("buscarButton")).click();
 //objeto no pasa a ser vendido, tiene el elemento que clicamos antes
-usersList.get(0).findElement(By.id("buy"));
+
 try {
+	usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",PO_View.getTimeout());
 usersList.get(0).findElement(By.id("sold")).getText();
 }catch(NoSuchElementException e) {
 }
@@ -785,6 +789,31 @@ usersList.get(0).findElement(By.id("sold")).getText();
 
 
 
+
+//P26. Loguearse como usuario y ver productos comprados
+@Test
+public void PR26() {
+//Vamos al formulario de logueo.
+PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
+//Rellenamos el formulario
+PO_LoginView.fillForm(driver, "testEmail5@Gmail.com" , "123456" );
+//COmprobamos que entramos en la pagina de productos comprados
+driver.findElement(By.partialLinkText("Gestión de productos")).click();
+driver.findElement(By.partialLinkText("Ver productos comprados")).click(); 
+PO_View.checkElement(driver, "text", "Productos comprados pòr del usuario");
+//deberiamos tener 2 productos
+List<WebElement> usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//tbody/tr",
+		  PO_View.getTimeout());
+assertEquals(2, usersList.size());
+//buscamos Producto 1, de precio 10, que compramos antes
+assertEquals("Producto 1",usersList.get(0).findElement(By.id("name")).getText());
+assertEquals("10.0",usersList.get(0).findElement(By.id("price")).getText());
+//buscamos Producto 3, de precio 20, que compramos antes
+assertEquals("Producto 3",usersList.get(0).findElement(By.id("name")).getText());
+assertEquals("20.0",usersList.get(0).findElement(By.id("price")).getText());
+
+
+}
 
 
 

@@ -52,7 +52,7 @@ public class ProductsService {
 
 	public boolean addProductToBroughtOfUser(Product Product, User user) {
 		
-		if(user.getWallet()-Product.getPrice()>0) {
+		if(user.getWallet()-Product.getPrice()>=0) {
 		usersRepository.UpdateWallet(user.getWallet()-Product.getPrice(), user.getId());
 		
 		ProductsRepository.updateSold(true, Product.getId());
