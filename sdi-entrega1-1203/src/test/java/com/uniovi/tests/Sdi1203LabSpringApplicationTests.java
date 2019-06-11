@@ -1,4 +1,4 @@
-package com.uniovi;
+package com.uniovi.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -39,7 +39,7 @@ import com.uniovi.tests.util.SeleniumUtils;
 @FixMethodOrder( MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Sdi1203LabSpringApplicationTests {
+public abstract class Sdi1203LabSpringApplicationTests {
 
 	//En Windows (Debe ser la versión 65.0.1 y desactivar las actualizacioens automáticas)):
 	static String PathFirefox64 = "C:\\Program Files\\Mozilla Firefox\\firefox.exe";
@@ -249,7 +249,8 @@ PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
 //COmprobamos que entramos en la pagina privada de Alumno
 PO_View.checkElement(driver, "text", "Gestión de productos");
 //deslogeamos y COmprobamos que entramos en la pagina de login de nuevo
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
+PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
+PO_View.checkElement(driver, "text", "Identificate");
 }
 
 //PR11. comprobar que el boton de deslogear no esta presente cuando no estas logeado
@@ -285,7 +286,8 @@ List<WebElement> usersList = SeleniumUtils.EsperaCargaPagina(driver, "free", "//
 assertEquals(11, usersList.size());
 
 //Ahora nos desconectamos
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
+PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
+PO_View.checkElement(driver, "text", "Identificate");
 }
 
 
@@ -360,110 +362,6 @@ public void PR15() {
             PO_View.getTimeout());
     assertEquals(6, usersList.size());
 }
-
-
-
-
-
-/*
-//P13. Loguearse como profesor y borrar el primer usuario
-@Test
-public void PR13() {
-//Vamos al formulario de logueo.
-PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
-//Rellenamos el formulario
-PO_LoginView.fillForm(driver, "Admin@Gmail.com" , "123456" );
-//COmprobamos que entramos en la pagina privada del Profesor
-PO_View.checkElement(driver, "text", "Admin@Gmail.com");
-//Pinchamos en la opción de menu de Notas: //li[contains(@id, 'marks-menu')]/a
-driver.findElement(By.partialLinkText("Gestión de Usuarios")).click();
-driver.findElement(By.partialLinkText("Ver Usuarios")).click(); 
-//comprobamos que todos los usuarios estan
-PO_View.checkElement(driver, "text", "testEmail1@Gmail.com"); 
-//borramos al usuario
-By link=By.partialLinkText("detalles");
-driver.findElement(link).click();
-//Ahora nos desconectamos
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
-}
-
-
-
-
- 
-//PR13. Loguearse como estudiante y ver los detalles de la nota con Descripcion = Nota A2.
-//P13. Ver la lista de Notas.
-@Test
-public void PR13() {
-//Vamos al formulario de logueo.
-PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
-//Rellenamos el formulario
-PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
-//COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Gestión de productos");
-SeleniumUtils.esperarSegundos(driver, 1);
-//Contamos las notas
-By link=By.partialLinkText("detalles");
-driver.findElement(link).click();
-//Esperamos por la ventana de detalle
-PO_View.checkElement(driver, "text", "Detalles de la oferta"); 
-SeleniumUtils.esperarSegundos(driver, 1);
-//Ahora nos desconectamos
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
-}
-
-//PR12. Loguearse, comprobar que se visualizan 4 filas de notas y desconectarse usando el rol de estudiante.
-@Test
-public void PR12() {
-//Vamos al formulario de logueo.
-PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
-//Rellenamos el formulario
-PO_LoginView.fillForm(driver, "testEmail1@Gmail.com" , "123456" );
-//COmprobamos que entramos en la pagina privada de Alumno
-PO_View.checkElement(driver, "text", "Gestión de productos");
-//Contamos el número de filas de notas
-List<WebElement> elementos = SeleniumUtils.EsperaCargaPagina(driver, "free", 
-"//tbody/tr", PO_View.getTimeout());
-assertTrue(elementos.size() == 4);
-//Ahora nos desconectamos
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
-}
-
-@Test
-public void PR141() {
-//Vamos al formulario de logueo.
-PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
-//Rellenamos el formulario
-PO_LoginView.fillForm(driver, "Admin@Gmail.com" , "123456" );
-//COmprobamos que entramos en la pagina privada del Profesor
-PO_View.checkElement(driver, "text", "Admin@Gmail.com");
-//Pinchamos en la opción de menu de Notas: //li[contains(@id, 'marks-menu')]/a
-driver.findElement(By.partialLinkText("Gestión de Usuarios")).click();
-driver.findElement(By.partialLinkText("Ver Usuarios")).click();
-List<WebElement> elementos = PO_View.checkElement(driver, "free", "//li[contains(@id, 'marks-menu')]/a");
-elementos.get(0).click(); 
-//Esperamos a aparezca la opción de añadir nota: //a[contains(@href, 'mark/add')]
-elementos = PO_View.checkElement(driver, "free", "//a[contains(@href, 'mark/add')]");
-//Pinchamos en agregar Nota.
-elementos.get(0).click();
-//Ahora vamos a rellenar la nota. //option[contains(@value, '4')]
-PO_PrivateView.fillFormAddMark(driver, 3, "Nota Nueva 1", "8");
-//Esperamos a que se muestren los enlaces de paginación la lista de notas
-elementos = PO_View.checkElement(driver, "free", "//a[contains(@class, 'page-link')]");
-//Nos vamos a la última página
-elementos.get(3).click();
-//Comprobamos que aparece la nota en la pagina
-elementos = PO_View.checkElement(driver, "text", "Nota Nueva 1");
-//Ahora nos desconectamos
-PO_PrivateView.clickOption(driver, "logout", "text", "Identificate");
-}
-
-
-//PRN. Loguearse como profesor, vamos a la ultima página y Eliminamos la Nota Nueva 1.
-//PRN. Ver la lista de Notas.
-*/    
-
-
 
 //P16. Loguearse como usuario y añadir oferta
 @Test
@@ -791,13 +689,77 @@ assertEquals(2, usersList.size());
 
 
 
-//PR27. Prueba de internacionalización
+//PR27. Prueba de internacionalización en 4 paginas
 @Test
 public void PR27() {
-PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", 
-PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
-SeleniumUtils.esperarSegundos(driver, 2);
+	SeleniumUtils.esperarSegundos(driver, 1);
+PO_HomeView.checkChangeIdiom(driver, "btnSpanish", "btnEnglish", PO_Properties.getSPANISH(), PO_Properties.getENGLISH());
+SeleniumUtils.esperarSegundos(driver, 1);
+//Vamos al formulario de logueo.
+PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
+//comprobamos cambios de inter. de la pagina de logeo
+PO_NavView.changeIdiom(driver, "English");
+PO_NavView.checkKey(driver, "login.message",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "password",PO_Properties.getENGLISH() );
+PO_NavView.changeIdiom(driver, "Spanish");
+PO_NavView.checkKey(driver, "login.message",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "password",PO_Properties.getSPANISH() );
+//Rellenamos el formulario
+PO_LoginView.fillForm(driver, "testEmail5@Gmail.com" , "123456" );
+//comprobamos cambios de inter. de pagina principal del usuario
+PO_NavView.changeIdiom(driver, "English");
+PO_NavView.checkKey(driver, "welcome.message",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "userProducts.message",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "privateZone.message",PO_Properties.getENGLISH() );
+PO_NavView.changeIdiom(driver, "Spanish");
+PO_NavView.checkKey(driver, "welcome.message",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "userProducts.message",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "privateZone.message",PO_Properties.getSPANISH() );
+//deslogeamos
+PO_NavView.clickOption(driver, "logout", "class", "btn btn-primary");
+//Vamos al formulario de registro
+PO_NavView.clickOption(driver, "signup", "class", "btn btn-primary");
+//comprobamos cambios de inter. de pagina de registro
+PO_NavView.changeIdiom(driver, "Spanish");
+PO_NavView.checkKey(driver, "login.message",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "name",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "lastName",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "password",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "passwordConfirm",PO_Properties.getSPANISH() );
+
+PO_NavView.changeIdiom(driver, "English");
+PO_NavView.checkKey(driver, "login.message",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "name",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "lastName",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "password",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "passwordConfirm",PO_Properties.getENGLISH() );
+PO_NavView.changeIdiom(driver, "Spanish");
+//Vamos al formulario de logueo.
+PO_LoginView.clickOption(driver, "login", "class", "btn btn-primary");
+//Rellenamos el formulario
+PO_LoginView.fillForm(driver, "testEmail5@Gmail.com" , "123456" );
+//COmprobamos que entramos en la pagina de busqueda
+driver.findElement(By.partialLinkText("Gestión de productos")).click();
+driver.findElement(By.partialLinkText("Ver productos a la venta")).click(); 
+PO_View.checkElement(driver, "text", "Las productos que actualmente figuran en el sistema son las siguientes:");
+//comprobamos cambios de inter. de pagina de registro
+PO_NavView.changeIdiom(driver, "Spanish");
+PO_NavView.checkKey(driver, "button.search",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "button.update",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "productlist.message",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "button.update",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "products",PO_Properties.getSPANISH() );
+PO_NavView.checkKey(driver, "description",PO_Properties.getSPANISH() );
+
+PO_NavView.changeIdiom(driver, "English");
+PO_NavView.checkKey(driver, "button.search",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "button.update",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "productlist.message",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "button.update",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "products",PO_Properties.getENGLISH() );
+PO_NavView.checkKey(driver, "description",PO_Properties.getENGLISH() );
 }
+
 
 //PR28. acceder a lista de administrador sin estar identificado
 @Test
@@ -807,6 +769,7 @@ driver.get(URL+"/user/list");
 //COmprobamos que segimos en la pagina de logeo
 PO_View.checkElement(driver, "text", "Identificate");
 }
+
 //PR29. acceder a lista de ofertas propias sin ester identificado
 @Test
 public void PR29() {
@@ -815,6 +778,7 @@ driver.get(URL+"/home");
 //COmprobamos que segimos en la pagina de logeo
 PO_View.checkElement(driver, "text", "Identificate");
 }
+
 //PR30. acceder a lista de administrador como usuario normal
 @Test
 public void PR30() {
