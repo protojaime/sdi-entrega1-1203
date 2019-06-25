@@ -9,6 +9,5 @@ public class Sdi1203LabSpringApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Sdi1203LabSpringApplication.class, args);
 	}
-
 }
 
